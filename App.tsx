@@ -7,10 +7,8 @@ import MainNavigations from './src/navigation/MainNaviagtions';
 
 const App = () => {
   return <NavigationContainer>
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <MainNavigations />
-    </SafeAreaView>
+    <StatusBar translucent backgroundColor="transparent" barStyle="dark-content" />
+    <MainNavigations />
   </NavigationContainer>
 }
 
