@@ -15,22 +15,22 @@ const WelcomeScreen = () => {
         />
         <View style={styles.bottomContainer}>
             <View style={{ flexDirection: "row", flexWrap: "wrap", alignSelf: "center", justifyContent: 'center', alignItems: "center" }}>
-                <AppText fontSize={24} style={[styles.text, { fontWeight: 'bold' }]}>
+                <AppText fontSize={20} style={[styles.text, { fontWeight: 'bold',color:colors.black }]}>
                     The
                 </AppText>
-                <AppText fontSize={24} style={[styles.text, { fontWeight: 'bold', marginHorizontal: 10, color: colors.secondary }]}>
+                <AppText fontSize={20} style={[styles.text, { fontWeight: 'bold', marginHorizontal: 10, color: colors.primary }]}>
                     Fashion App
                 </AppText>
-                <AppText fontSize={24} style={[styles.text, { fontWeight: 'bold' }]}>
+                <AppText fontSize={20} style={[styles.text, { fontWeight: 'bold',color:colors.black }]}>
                     That
                 </AppText>
-                <AppText fontSize={25} style={[styles.text, { fontWeight: 'bold' }]}>
+                <AppText fontSize={20} style={[styles.text, { fontWeight: 'bold',color:colors.black }]}>
                     Makes You Look You Best
                 </AppText>
             </View>
 
             <View style={{ justifyContent: "center", alignItems: "center", paddingHorizontal: 20 }}>
-                <AppText fontSize={14} style={[styles.text, { fontWeight: 'bold', textAlign: "center", lineHeight: 25 }]}>
+                <AppText fontSize={14} style={[styles.text, { fontWeight: '300', textAlign: "center", lineHeight: 25 }]}>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit utem quasi est minima dolores.
                 </AppText>
             </View>
@@ -42,10 +42,10 @@ const WelcomeScreen = () => {
             </TouchableOpacity>
 
             <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", paddingHorizontal: 20, }}>
-                <AppText fontSize={14} style={[styles.text, { fontWeight: '500', textAlign: "center" }]}>
+                <AppText fontSize={14} style={[styles.text, { fontWeight: '500', textAlign: "center",color:colors.black }]}>
                     Already have an account?
                 </AppText>
-                <Link screen="SignInScreen" params={{}} style={{ textDecorationLine: "underline", fontWeight: "900", fontSize: 16, marginLeft: 4 }}>
+                <Link screen="AuthScreen" params={{}} style={{ textDecorationLine: "underline", fontWeight: "bold", fontSize: 16, marginLeft: 4,color:colors.primary }}>
                     Sign in
                 </Link>
             </View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly"
     },
     text: {
-        color: colors.primary
+        color: colors.black
     }
 
 })
