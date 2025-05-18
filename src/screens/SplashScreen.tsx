@@ -16,7 +16,7 @@ const SplashScreen = ({ navigation }: any) => {
     return (
         <ImageBackground source={require('../../assets/images/SpalshScreenBg.jpg')}
             style={styles.background}
-            resizeMode="cover" blurRadius={1.5}>
+            resizeMode="cover" blurRadius={0.1}>
             <View style={styles.mainContainer}>
                 <AppText fontSize={42} style={styles.appName}>
                     Ecommerce

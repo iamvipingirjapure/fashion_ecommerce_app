@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Octicons';
 import colors from '../config/colors';
 
 const BottomTabBar = ({ state, descriptors, navigation }: any) => {
@@ -9,15 +9,15 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
       case 'Home':
         return 'home';
       case 'Cart':
-        return 'shopping-bag';
+        return 'feed-tag';
       case 'Favorites':
-        return 'favorite-border';
+        return 'heart-fill';
       case 'Chat':
         return 'chat-bubble-outline';
       case 'Profile':
-        return 'person-outline';
+        return 'person-fill';
       case 'Notifications':
-        return 'notifications-none';
+        return 'bell-fill';
       default:
         return 'home';
     }
@@ -52,7 +52,7 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
               <Icon
                 name={getIcon(label)}
                 size={24}
-                color={isActive ? colors.primary : '#bbb'}
+                color={isActive ? colors.primary : '#9b9b9f'}
               />
             </View>
           </TouchableOpacity>
@@ -67,8 +67,9 @@ export default BottomTabBar;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: colors.primary,
-    padding: 14,
+    backgroundColor: colors.bottomMenuBarBg,
+    paddingHorizontal: 4,
+    paddingVertical: 8,
     borderRadius: 40,
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -83,8 +84,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   iconWrapper: {
-    backgroundColor: colors.primary,
-    padding: 10,
+    backgroundColor: colors.white,
+    padding: 15,
     borderRadius: 100,
   },
 });
