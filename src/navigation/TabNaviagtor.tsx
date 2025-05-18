@@ -4,6 +4,7 @@ import Octicons from 'react-native-vector-icons/Octicons'
 import HomeScreen from '../screens/HomeScreen';
 import BottomTabBar from './BottomTabBar';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
+import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,11 +30,25 @@ export const TabNavigator = () => (
         tabBarIcon: ({ color, size }) => <Octicons name="Cart" color={color} size={size} />,
       }}
     />
+    <Tab.Screen
+      name="Favorites"
+      component={MyWishlistScreen}
+      options={{
+        tabBarIcon: ({ color, size }) => <Octicons name="Cart" color={color} size={size} />,
+      }}
+    />
      <Tab.Screen
       name="Notifications"
       component={NotificationsScreen}
       options={{
         tabBarIcon: ({ color, size }) => <Octicons name="Notifications" color={color} size={size} />,
+      }}
+    />
+      <Tab.Screen
+      name="Profile"
+      component={MyWishlistScreen}
+      options={{
+        tabBarIcon: ({ color, size }) => <Octicons name="heart-fill" color={color} size={size} />,
       }}
     />
   </Tab.Navigator>
