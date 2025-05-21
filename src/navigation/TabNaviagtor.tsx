@@ -14,6 +14,7 @@ export const TabNavigator = () => (
       headerShown: false,
       tabBarActiveTintColor: '#1976d2',
     }}
+    initialRouteName='HomeScreen'
     tabBar={(props) => <BottomTabBar {...props} />}
   >
     <Tab.Screen
