@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     justifyContent: 'space-around',
     alignItems: 'center',
-    margin: 16,
+    marginHorizontal: 12,
+    marginVertical: 4,
   },
   tabButton: {
     alignItems: 'center',
