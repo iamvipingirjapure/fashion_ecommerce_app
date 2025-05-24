@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native";
 import AppText from "./AppText";
 
 const HomeHeader = () => {
-    return <SafeAreaView style={{flexDirection:'row',flex:1,justifyContent:"space-between",minHeight:80,alignItems:"center"}}>
+    return <SafeAreaView style={{flexDirection:'row',flex:1,justifyContent:"space-between",height:80,alignItems:"center"}}>
         <View style={{flex:1}}>
             <AppText fontSize={14} style={{color:'black'}}>Location</AppText>
             <View style={{flexDirection:"row",marginTop:15,alignItems:'center'}}>

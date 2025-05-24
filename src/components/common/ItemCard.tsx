@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     itemTitle: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '400',
         marginTop: 8,
     },
