@@ -6,7 +6,9 @@ import {
     FlatList,
     TouchableOpacity,
     Dimensions,
+    View,
 } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/common/Header';
 import { categories, wishlistItems } from './data';
 import colors from '../../config/colors';
@@ -17,7 +19,7 @@ const MyWishlistScreen = () => {
     const [selectedCategory, setSelectedCategory] = useState(ALL)
 
     const filteredItems = selectedCategory === ALL ? wishlistItems :
-        wishlistItems.filter((item) => item.category === selectedCategory)
+        wishlistItems.filter((item:any) => item?.category === selectedCategory)
     const renderCategoryItem = (category: any) => {
         const isActive = selectedCategory === category.item;
         return <TouchableOpacity
@@ -39,7 +41,7 @@ const MyWishlistScreen = () => {
 
         <FlatList
             data={filteredItems}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item:{id:string}) => item.id}
             renderItem={({ item }) => <ItemCard item={item} />}
             numColumns={2}
             columnWrapperStyle={
@@ -50,12 +52,15 @@ const MyWishlistScreen = () => {
             contentContainerStyle={styles.grid}
             centerContent
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={<View style={styles.emptyContainer}>
+            <Ionicons name="rocket-outline" size={40} color={colors.disabled} />
+            <Text style={styles.emptyText}>No Items Found</Text>
+          </View>}
         />
     </SafeAreaView>
 }
 
 const { width } = Dimensions.get('window');
-const cardWidth = (width - 48) / 2;
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -98,6 +103,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingBottom: 20,
     },
+    emptyContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50,
+      },
+      emptyText: {
+        marginTop: 10,
+        fontSize: 18,
+        color: colors.disabled,
+        fontWeight: '500',
+      },
 });
 
 export default MyWishlistScreen;

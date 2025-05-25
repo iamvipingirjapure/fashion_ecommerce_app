@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import BottomTabBar from './BottomTabBar';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
 import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +13,6 @@ export const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={{
       headerShown: false,
-      tabBarActiveTintColor: '#1976d2',
     }}
     initialRouteName='HomeScreen'
     tabBar={(props) => <BottomTabBar {...props} />}
@@ -47,7 +47,7 @@ export const TabNavigator = () => (
     />
       <Tab.Screen
       name="Profile"
-      component={MyWishlistScreen}
+      component={ProfileScreen}
       options={{
         tabBarIcon: ({ color, size }) => <Octicons name="heart-fill" color={color} size={size} />,
       }}
