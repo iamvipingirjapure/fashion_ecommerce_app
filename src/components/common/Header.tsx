@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, StatusBar } from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../../config/colors';
 import { poppins } from '../../utils/fonts';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Header = ({ title = '', showNotification = false ,paddingHorizontal=20}) => {
   const navigation:any = useNavigation();
@@ -32,7 +33,7 @@ const Header = ({ title = '', showNotification = false ,paddingHorizontal=20}) =
 
 const styles = StyleSheet.create({
   safeArea: {
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   container: {
     height: 56,

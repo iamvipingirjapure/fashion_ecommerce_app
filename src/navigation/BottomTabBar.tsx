@@ -26,7 +26,6 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
   return (
     <View style={styles.container}>
       {state.routes.map((route: any, index: number) => {
-        const { options } = descriptors[route.key];
         const label = route.name;
         const isActive = state.index === index;
 
@@ -74,19 +73,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginHorizontal: 12,
-    marginVertical: 4,
+    marginVertical: 3,
   },
   tabButton: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    width: 45,
+    height: 45,
   },
   activeTab: {
     position: 'relative',
   },
   iconWrapper: {
+    width: 45,
+    height:45,
     backgroundColor: colors.white,
-    padding: 15,
-    borderRadius: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3, 
   },
 });
