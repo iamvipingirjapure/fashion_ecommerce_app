@@ -9,16 +9,15 @@ import {
     PermissionsAndroid,
     Platform,
     Alert,
-    SafeAreaView,
-    KeyboardAvoidingView,
+    SafeAreaView
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
-import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AppText from '../../components/common/AppText';
 import colors from '../../config/colors';
 import Header from '../../components/common/Header';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const CompleteProfile = ({ navigation }: any) => {
     const [name, setName] = useState('');
@@ -67,41 +66,46 @@ const CompleteProfile = ({ navigation }: any) => {
             return;
         }
 
-        const choice = await new Promise<'camera' | 'gallery' | null>((resolve) => {
-            Alert.alert('Upload Photo', 'Choose an option', [
-                { text: 'Camera', onPress: () => resolve('camera') },
-                { text: 'Gallery', onPress: () => resolve('gallery') },
-                { text: 'Cancel', onPress: () => resolve(null), style: 'cancel' },
-            ]);
-        });
+        Alert.alert('Upload Photo', 'Choose an option', [
+            { text: 'Camera', onPress: () => openCamera() },
+            { text: 'Gallery', onPress: () => openGallery() },
+            { text: 'Cancel', style: 'cancel' },
+        ]);
+    };
 
-        const options: any = {
-            mediaType: 'photo' as const,
-            quality: 0.7,
-        };
+    const openCamera = () => {
+        launchCamera({ mediaType: 'photo', quality: 0.7 }, handleImageResponse);
+    };
 
-        if (choice === 'camera') {
-            launchCamera(options, handleImageResponse);
-        } else if (choice === 'gallery') {
-            launchImageLibrary(options, handleImageResponse);
-        }
+    const openGallery = () => {
+        launchImageLibrary({ mediaType: 'photo', quality: 0.7 }, handleImageResponse);
     };
 
     const handleImageResponse = (response: any) => {
         if (response.didCancel || response.errorCode) {
             console.warn('Image selection cancelled or failed');
         } else if (response.assets && response.assets.length > 0) {
-            setProfileImage(response.assets[0].uri || null);
+            setProfileImage(response.assets[0].uri || undefined);
         }
     };
 
+    const handleCompleteProfile = () => {
+        navigation.replace('TabNavigator', {
+            screen: 'HomeScreen',
+            params: { location: 'location', fullAddress: 'addressString' },
+        });
+    };
+
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        <SafeAreaView style={{ flex: 1,backgroundColor:colors.white }}>
+            <Header paddingHorizontal={20} />
+            <KeyboardAwareScrollView
                 style={styles.container}
+                contentContainerStyle={{ paddingBottom: 40 }}
+                enableOnAndroid
+                extraScrollHeight={100}
+                keyboardShouldPersistTaps="handled"
             >
-                <Header paddingHorizontal={0}/>
                 <Text style={styles.title}>Complete Your Profile</Text>
                 <Text style={styles.subtitle}>
                     Don’t worry, only you can see your personal data. No one else will be able to see it.
@@ -120,7 +124,8 @@ const CompleteProfile = ({ navigation }: any) => {
                         <MaterialIcons name="edit" size={18} color="white" />
                     </TouchableOpacity>
                 </View>
-                <View style={{ width: '100%' }}>
+
+                <View style={styles.inputWrapper}>
                     <AppText style={styles.inputLabel} fontSize={12}>Name</AppText>
                     <TextInput
                         value={name}
@@ -130,7 +135,8 @@ const CompleteProfile = ({ navigation }: any) => {
                         placeholderTextColor={colors.black}
                     />
                 </View>
-                <View style={{ width: '100%' }}>
+
+                <View style={styles.inputWrapper}>
                     <AppText style={styles.inputLabel} fontSize={12}>Phone Number</AppText>
                     <TextInput
                         value={phone}
@@ -138,9 +144,11 @@ const CompleteProfile = ({ navigation }: any) => {
                         style={styles.input}
                         placeholder="Phone Number"
                         keyboardType="phone-pad"
+                        placeholderTextColor={colors.black}
                     />
                 </View>
-                <View style={{ width: '100%' }}>
+
+                <View style={styles.inputWrapper}>
                     <AppText style={styles.inputLabel} fontSize={12}>Gender</AppText>
                     <View style={styles.dropdown}>
                         <Picker
@@ -155,35 +163,20 @@ const CompleteProfile = ({ navigation }: any) => {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.button} onPress={()=> navigation.replace('TabNavigator', {
-                        screen: 'HomeScreen',
-                        params: { location: 'location', fullAddress: 'addressString' },
-                      })}>
+                <TouchableOpacity style={styles.button} onPress={handleCompleteProfile}>
                     <Text style={styles.buttonText}>Complete Profile</Text>
                 </TouchableOpacity>
-            </KeyboardAvoidingView>
+            </KeyboardAwareScrollView>
         </SafeAreaView>
     );
 };
 
 export default CompleteProfile;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 24,
-        backgroundColor: '#fff',
-    },
-    backButton: {
-        position: 'absolute',
-        top: 60,
-        left: 24,
-        borderWidth: 1,
-        borderColor: colors.disabled,
-        height: 40,
-        width: 40,
-        justifyContent: 'center',
-        alignItems: "center",
-        borderRadius: 50
     },
     title: {
         fontSize: 28,
@@ -192,7 +185,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 12,
     },
-    inputLabel: { marginBottom: 8 },
     subtitle: {
         fontSize: 16,
         textAlign: 'center',
@@ -200,9 +192,8 @@ const styles = StyleSheet.create({
         marginBottom: 24,
     },
     imageWrapper: {
-        position: 'relative',
+        alignItems: 'center',
         marginBottom: 24,
-        alignItems: "center"
     },
     profileImage: {
         width: 120,
@@ -212,41 +203,45 @@ const styles = StyleSheet.create({
     },
     editIcon: {
         position: 'absolute',
-        bottom: 1,
-        backgroundColor: '#6a4029',
+        bottom: 6,
+        right: '32%',
+        backgroundColor: colors.primary,
         borderRadius: 16,
         padding: 6,
-        marginLeft:70,
+    },
+    inputWrapper: {
+        width: '100%',
+        marginBottom: 16,
+    },
+    inputLabel: {
+        marginBottom: 8,
     },
     input: {
         width: '100%',
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 28,
-        marginBottom: 16,
         fontSize: 16,
         height: 55,
-        paddingLeft: 12
+        paddingHorizontal: 16,
+        color: colors.black,
     },
     dropdown: {
-        width: '100%',
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 28,
         overflow: 'hidden',
-        marginBottom: 24,
-        paddingLeft: 20,
-
+        paddingLeft: 12,
     },
     button: {
-        width: '100%',
+        marginTop: 24,
+        backgroundColor: colors.primary,
         padding: 16,
-        backgroundColor: '#6a4029',
         borderRadius: 40,
         alignItems: 'center',
     },
     buttonText: {
-        color:colors.white,
+        color: colors.white,
         fontSize: 16,
     },
 });

@@ -21,7 +21,7 @@ const ItemCard = (props: any) => {
             </View>
             <Text style={styles.itemTitle}>{item.title}</Text>
         </View>
-        <Text style={styles.price}>₹ {item.price}</Text>,
+        <Text style={styles.price}>₹ {item.price}</Text>
     </View>
 }
 

@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import colors from '../config/colors';
 
-const BottomTabBar = ({ state, descriptors, navigation }: any) => {
+const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
   const getIcon = (name: string) => {
     switch (name) {
-      case 'Home':
+      case 'HomeScreen':
         return 'home';
       case 'Cart':
         return 'feed-tag';
@@ -15,9 +16,9 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
       case 'Chat':
         return 'chat-bubble-outline';
       case 'Profile':
-        return 'person-fill';
+        return 'person';
       case 'Notifications':
-        return 'bell-fill';
+        return 'bell';
       default:
         return 'home';
     }
@@ -25,9 +26,8 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      {state.routes.map((route: any, index: number) => {
-        const label = route.name;
-        const isActive = state.index === index;
+      {state.routes.map((route, index) => {
+        const isFocused = state.index === index;
 
         const onPress = () => {
           const event = navigation.emit({
@@ -36,22 +36,22 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
             canPreventDefault: true,
           });
 
-          if (!isActive && !event.defaultPrevented) {
-            navigation.navigate(route.name);
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name as never);
           }
         };
 
         return (
           <TouchableOpacity
-            key={label}
+            key={route.key}
             onPress={onPress}
-            style={[styles.tabButton, isActive && styles.activeTab]}
+            style={[styles.tabButton, isFocused && styles.activeTab]}
           >
-            <View style={isActive ? styles.iconWrapper : undefined}>
+            <View style={isFocused ? styles.iconWrapper : undefined}>
               <Icon
-                name={getIcon(label)}
+                name={getIcon(route.name)}
                 size={24}
-                color={isActive ? colors.primary : '#9b9b9f'}
+                color={isFocused ? colors.primary :colors.grey}
               />
             </View>
           </TouchableOpacity>
@@ -64,38 +64,44 @@ const BottomTabBar = ({ state, descriptors, navigation }: any) => {
 export default BottomTabBar;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    backgroundColor: colors.bottomMenuBarBg,
-    paddingHorizontal: 4,
-    paddingVertical: 8,
-    borderRadius: 40,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginHorizontal: 12,
-    marginVertical: 3,
-  },
-  tabButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    width: 45,
-    height: 45,
-  },
-  activeTab: {
-    position: 'relative',
-  },
-  iconWrapper: {
-    width: 45,
-    height:45,
-    backgroundColor: colors.white,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3, 
-  },
-});
+    safeArea: {
+      backgroundColor: 'transparent',
+    },
+    container: {
+      flexDirection: 'row',
+      backgroundColor: colors.bottomMenuBarBg,
+      paddingHorizontal: 16,
+      paddingVertical: 10,
+      borderRadius: 40,
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      marginHorizontal: 20,
+      marginBottom: Platform.OS === 'ios' ? 20 : 10,
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowOffset: { width: 0, height: 4 },
+      shadowRadius: 10,
+      elevation: 10,
+    },
+    tabButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+    },
+    activeTab: {
+      position: 'relative',
+    },
+    iconWrapper: {
+      width: 48,
+      height: 48,
+      backgroundColor: colors.white,
+      borderRadius: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+    }
+  });
