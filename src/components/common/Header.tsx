@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import colors from '../../config/colors';
 import { poppins } from '../../utils/fonts';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { SCREENS } from '../../navigation/Screens';
 
 const Header = ({ title = '', showNotification = false ,paddingHorizontal=20}) => {
   const navigation:any = useNavigation();
@@ -19,7 +20,7 @@ const Header = ({ title = '', showNotification = false ,paddingHorizontal=20}) =
         <Text style={styles.title}>{title}</Text>
 
         {showNotification ? (
-          <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+          <TouchableOpacity onPress={() => navigation.navigate(SCREENS.NOTIFICATIONS)}>
             <Octicons name="bell-fill" size={24} color={colors.primary} />
           </TouchableOpacity>
         ) : (

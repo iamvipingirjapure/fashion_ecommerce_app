@@ -14,6 +14,7 @@ import ItemCard from "../components/common/ItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import { GetHomeProducts } from "../redux/slices/HomeSlice";
 import { AppDispatch } from "../redux/store";
+import { poppins } from "../utils/fonts";
 
 const categoryData = [
     { icon: '', label: 'T-Shirt' },
@@ -32,7 +33,7 @@ const HomeScreen = () => {
         dispatch(GetHomeProducts());
     }, []);
 
-    const renderCategoryItem = (category: any) => {
+    const renderCategoryItem = (category: {item:string}) => {
         const isActive = selectedCategory === category.item;
         return <TouchableOpacity
             style={[styles.categoryButton, isActive && styles.activeCategory]}
@@ -111,7 +112,7 @@ const HomeScreen = () => {
                 <FlatList
                     data={categories}
                     keyExtractor={(category: any) => category}
-                    renderItem={(category) => renderCategoryItem(category)}
+                    renderItem={(category) => renderCategoryItem(category as {item:string})}
                     horizontal
                     contentContainerStyle={styles.categoryListContent}
                     showsHorizontalScrollIndicator={false}
@@ -151,14 +152,15 @@ const styles = StyleSheet.create({
     categoryText: {
         fontSize: 16,
         color: colors.primary,
-        fontWeight: '800',
+        fontFamily:poppins.bold,
+        includeFontPadding:false
     },
     activeCategoryText: {
         color: colors.white,
         fontWeight: '600',
     },
     grid: {
-        paddingBottom: 20,
+        paddingBottom: 60,
     },
 });
 

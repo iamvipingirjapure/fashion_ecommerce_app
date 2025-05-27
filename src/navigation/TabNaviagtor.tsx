@@ -6,6 +6,7 @@ import BottomTabBar from './BottomTabBar';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
 import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import { SCREENS } from './Screens';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ export const TabNavigator = () => (
       }}
     />
      <Tab.Screen
-      name="Notifications"
+      name={SCREENS.NOTIFICATIONS}
       component={NotificationsScreen}
       options={{
         tabBarIcon: ({ color, size }) => <Octicons name="Notifications" color={color} size={size} />,

@@ -158,7 +158,6 @@ const ProfileScreen: React.FC = () => {
                 onCancel={() => setLogoutVisible(false)}
                 onConfirm={() => {
                     setLogoutVisible(false);
-                    // Call your logout logic here
                 }}
             />
         </SafeAreaView>
