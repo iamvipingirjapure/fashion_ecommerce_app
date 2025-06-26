@@ -8,6 +8,7 @@ import OtpVerifyScreen from '../screens/auth/OtpVerifyScreen';
 import NewPasswordScreen from '../screens/auth/NewPasswordScreen';
 import CompleteProfileScreen from '../screens/auth/CompleteProfileScreen';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
+import { SCREENS } from './Screens';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -25,19 +26,69 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const MainNavigations = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="AuthScreen"
-      screenOptions={{ headerShown: false }} 
-    >
-      <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      <Stack.Screen name="AuthScreen" component={AuthScreen} />
-      <Stack.Screen name="OtpVerifyScreen" component={OtpVerifyScreen} />
-      <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
-      <Stack.Screen name="CompleteProfileScreen" component={CompleteProfileScreen} />
-      <Stack.Screen name="NotificationsScreen" component={NotificationsScreen} />
-      <Stack.Screen name="TabNavigator" component={TabNavigator} />
-    </Stack.Navigator>
+    <Stack.Navigator initialRouteName="TabNavigator" screenOptions={{ headerShown: false }}>
+  <Stack.Screen
+    name="SplashScreen"
+    component={SplashScreen}
+    options={{
+      animation: 'fade',
+      animationTypeForReplace: 'pop',
+    }}
+  />
+  <Stack.Screen
+    name="WelcomeScreen"
+    component={WelcomeScreen}
+    options={{
+      animation: 'slide_from_right',
+    }}
+  />
+  <Stack.Screen
+    name="AuthScreen"
+    component={AuthScreen}
+    options={{
+      animation: 'slide_from_right',
+    }}
+  />
+  <Stack.Screen
+    name="OtpVerifyScreen"
+    component={OtpVerifyScreen}
+    options={{
+      animation: 'slide_from_bottom',
+      presentation: 'modal',
+    }}
+  />
+  <Stack.Screen
+    name={SCREENS.NEW_PASSWORD as keyof RootStackParamList}
+    component={NewPasswordScreen}
+    options={{
+      headerShown: false,
+      presentation: 'modal',
+      animationTypeForReplace: 'push',
+      animation: 'slide_from_right',
+    }}
+  />
+  <Stack.Screen
+    name="CompleteProfileScreen"
+    component={CompleteProfileScreen}
+    options={{
+      animation: 'slide_from_right',
+    }}
+  />
+  <Stack.Screen
+    name="NotificationsScreen"
+    component={NotificationsScreen}
+    options={{
+      animation: 'slide_from_right',
+    }}
+  />
+  <Stack.Screen
+    name="TabNavigator"
+    component={TabNavigator}
+    options={{
+      animation: 'fade_from_bottom',
+    }}
+  />
+</Stack.Navigator>
   );
 };
 
