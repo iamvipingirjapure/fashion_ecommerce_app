@@ -39,9 +39,9 @@ const NewPasswordScreen = ({ navigation }: any) => {
         <SafeAreaView style={styles.container}>
             <Header paddingHorizontal={0} />
             <KeyboardAwareScrollView
-                contentContainerStyle={{ paddingBottom: 40 }}
+                contentContainerStyle={{ paddingBottom: 0 }}
                 enableOnAndroid
-                extraScrollHeight={60}
+                extraScrollHeight={0}
                 keyboardShouldPersistTaps="handled"
             >
                 <Text style={styles.title}>New Password</Text>

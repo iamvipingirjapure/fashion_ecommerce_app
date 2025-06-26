@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import colors from '../../config/colors';
 import Header from '../../components/common/Header';
-
+import { SCREENS } from '../../navigation/Screens';
+const OtpLength = 4;
 const OtpVerifyScreen = ({navigation}:any) => {
-  const [otp, setOtp] = useState(['', '', '', '']);
+  const [otp, setOtp] = useState(new Array(OtpLength).fill(''));
   const inputs = useRef<Array<TextInput | null>>([]);
 
   const handleChange = (text: string, index: number) => {
@@ -38,7 +39,7 @@ const OtpVerifyScreen = ({navigation}:any) => {
 
   const handleVerify = () => {
     console.log('Entered OTP:', otp.join(''));
-    navigation.navigate('NewPasswordScreen')
+    navigation.navigate(SCREENS.NEW_PASSWORD)
   };
 
   return (
@@ -126,10 +127,10 @@ const styles = StyleSheet.create({
   },
   otpInput: {
     width: 60,
-    height: 50,
-    borderRadius: 30,
+    height: 60,
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor:'#333' ,
     textAlign: 'center',
     fontSize: 22,
     color: '#333',

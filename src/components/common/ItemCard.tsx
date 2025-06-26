@@ -12,7 +12,7 @@ const ItemCard = (props: any) => {
             uri: item?.image
         }} style={styles.image} resizeMode="center" />
         <TouchableOpacity style={styles.heartIcon}>
-            <Ionicons name="heart" size={20} color={colors.primary} />
+            <Ionicons name={true ? "heart" : "heart-outline"} size={24} color={colors.primary} />
         </TouchableOpacity>
         <View style={styles.itemNameAndRating}>
             <View style={styles.row}>
@@ -47,10 +47,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         right: 10,
-        backgroundColor: colors.white,
-        padding: 6,
+        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        padding: 8,
         borderRadius: 999,
-        elevation: 2,
+        elevation: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     itemTitle: {
         fontSize: 14,

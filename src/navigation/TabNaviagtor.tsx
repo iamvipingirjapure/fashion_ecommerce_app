@@ -43,6 +43,7 @@ export const TabNavigator = () => (
       name={SCREENS.NOTIFICATIONS}
       component={NotificationsScreen}
       options={{
+        animation: 'shift',
         tabBarIcon: ({ color, size }) => <Octicons name="Notifications" color={color} size={size} />,
       }}
     />
