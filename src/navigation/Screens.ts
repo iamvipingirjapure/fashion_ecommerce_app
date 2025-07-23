@@ -8,4 +8,5 @@ export const SCREENS = {
     COMPLETE_PROFILE: 'CompleteProfileScreen',
     NOTIFICATIONS_SCREEN: 'NotificationsScreen',
     TAB_NAVIGATOR: 'TabNavigator',
+    PRACTICE_APPS: 'PracticeApps',
 }

@@ -17,9 +17,10 @@ import Feather from "react-native-vector-icons/Feather";
 import Header from "../../components/common/Header";
 import colors from "../../config/colors";
 import LogoutModal from "./Logout";
+import { SCREENS } from "../../navigation/Screens";
 
 const profileOptions = [
-    { icon: "user", label: "Your profile",lib:'Feather' },
+    { icon: "user", label: "Practice Apps",lib:'Feather',navigation:SCREENS.PRACTICE_APPS },
     { icon: "credit-card", label: "Payment Methods", lib: "Feather" },
     { icon: "clipboard", label: "My Orders", lib: "Feather" },
     { icon: "settings", label: "Settings",lib:'Feather' },
@@ -28,7 +29,7 @@ const profileOptions = [
     { icon: "user-plus", label: "Invites Friends" ,lib:'Feather'},
 ];
 
-const ProfileScreen: React.FC = () => {
+const ProfileScreen: React.FC = ({navigation}:any) => {
     const [profileImage, setProfileImage] = useState<string | undefined>(undefined);
     const [logoutVisible, setLogoutVisible] = useState(false);
     const requestPermissions = async () => {
@@ -134,7 +135,7 @@ const ProfileScreen: React.FC = () => {
 
                 <View style={styles.optionList}>
                     {profileOptions.map((item, index) => (
-                        <TouchableOpacity key={index} style={styles.optionRow}>
+                        <TouchableOpacity key={index} style={styles.optionRow} onPress={()=>navigation.navigate(item.navigation)}>
                             <View style={styles.iconLabel}>
                                 {renderIcon(item)}
                                 <Text style={styles.optionLabel}>{item.label}</Text>
