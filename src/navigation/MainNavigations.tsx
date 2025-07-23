@@ -9,6 +9,9 @@ import NewPasswordScreen from '../screens/auth/NewPasswordScreen';
 import CompleteProfileScreen from '../screens/auth/CompleteProfileScreen';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
 import { SCREENS } from './Screens';
+import List from '../practice_apps/List';
+import { PracticeAppsScreen } from '../practice_apps/PracticeAppsScreen';
+import ChangingBgColour from '../practice_apps/changing_background_color/ChangingBgColor';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -86,6 +89,26 @@ const MainNavigations = () => {
     component={TabNavigator}
     options={{
       animation: 'fade_from_bottom',
+    }}
+  />
+    <Stack.Screen
+    name={SCREENS.PRACTICE_APPS as keyof RootStackParamList}
+    component={List}
+    options={{
+      headerShown: false,
+      presentation: 'modal',
+      animationTypeForReplace: 'push',
+      animation: 'slide_from_right',
+    }}
+  />
+   <Stack.Screen
+    name={PracticeAppsScreen.CHANGING_BACKGROUND as keyof RootStackParamList}
+    component={ChangingBgColour}
+    options={{
+      headerShown: false,
+      presentation: 'modal',
+      animationTypeForReplace: 'push',
+      animation: 'slide_from_right',
     }}
   />
 </Stack.Navigator>
