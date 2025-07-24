@@ -16,12 +16,18 @@ export const listItems: {
     id: 2,
     title: 'Rolling Dice',
     icon: '',
-    path: PracticeAppsScreen.CHANGING_BACKGROUND,
+    path: PracticeAppsScreen.ROLLING_DICE,
   },
      {
     id: 3,
     title: 'Currency Convertor',
     icon: '',
     path: PracticeAppsScreen.CHANGING_BACKGROUND,
+  },
+       {
+    id: 4,
+    title: 'Music Player',
+    icon: '',
+    path: PracticeAppsScreen.MUSIC_PLAYER,
   },
 ];
