@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import colors from '../config/colors';
-import Header from '../components/common/Header';
-import {listItems} from './data';
+import colors from '../../config/colors';
+import Header from '../../components/common/Header';
+import {listItems} from '../data';
 import {useNavigation} from '@react-navigation/native';
 const List = () => {
   const navigation: any = useNavigation();
