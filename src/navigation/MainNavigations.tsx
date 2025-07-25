@@ -14,6 +14,8 @@ import {PracticeAppsScreen} from '../practice_apps/PracticeAppsScreen';
 import ChangingBgColour from '../practice_apps/changing_background_color/ChangingBgColor';
 import RollingDice from '../practice_apps/rolling_dice/RollingDice';
 import MusicPlayer from '../practice_apps/music_player/MusicPlayer';
+import Login from '../practice_apps/ui_screens/runroutefinder/Login';
+import HomePage from '../practice_apps/ui_screens/blue_theme/HomePage';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -127,9 +129,30 @@ const MainNavigations = () => {
           animation: 'slide_from_right',
         }}
       />
-          <Stack.Screen
+      <Stack.Screen
         name={PracticeAppsScreen.MUSIC_PLAYER as keyof RootStackParamList}
         component={MusicPlayer}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'slide_from_right',
+        }}
+      />
+
+      <Stack.Screen
+        name={PracticeAppsScreen.RUN_ROUTE_FINDER as keyof RootStackParamList}
+        component={Login}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={PracticeAppsScreen.BLUE_THEME_HOMEPAGE as keyof RootStackParamList}
+        component={HomePage}
         options={{
           headerShown: false,
           presentation: 'modal',

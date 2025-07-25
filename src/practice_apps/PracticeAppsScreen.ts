@@ -2,4 +2,6 @@ export const PracticeAppsScreen = {
     'CHANGING_BACKGROUND' : 'ChanginBackground',
     'ROLLING_DICE' : 'ROLLING_DICE',
     'MUSIC_PLAYER' : 'MUSIC_PLAYER',
+    'RUN_ROUTE_FINDER' : "RUN_ROUTE_FINDER",
+    'BLUE_THEME_HOMEPAGE' : 'BLUE_THEME_HOMEPAGE'
 }
