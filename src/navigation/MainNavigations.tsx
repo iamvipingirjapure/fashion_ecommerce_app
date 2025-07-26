@@ -16,6 +16,11 @@ import RollingDice from '../practice_apps/rolling_dice/RollingDice';
 import MusicPlayer from '../practice_apps/music_player/MusicPlayer';
 import Login from '../practice_apps/ui_screens/runroutefinder/Login';
 import HomePage from '../practice_apps/ui_screens/blue_theme/HomePage';
+import BlueThemeLogin from '../practice_apps/ui_screens/blue_theme/BlueThemeLogin';
+import BlueThemeRegister from '../practice_apps/ui_screens/blue_theme/BlueThemeRegister';
+import PinkThemeHomePage from '../practice_apps/ui_screens/pink_theme/PinkThemeHomePage';
+import PinkThemeLoginPage from '../practice_apps/ui_screens/pink_theme/PinkThemeLoginPage';
+import PinkThemeRegisterPage from '../practice_apps/ui_screens/pink_theme/PinkThemeRegisterPage';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -151,13 +156,69 @@ const MainNavigations = () => {
         }}
       />
       <Stack.Screen
-        name={PracticeAppsScreen.BLUE_THEME_HOMEPAGE as keyof RootStackParamList}
+        name={
+          PracticeAppsScreen.BLUE_THEME_HOMEPAGE as keyof RootStackParamList
+        }
         component={HomePage}
         options={{
           headerShown: false,
           presentation: 'modal',
           animationTypeForReplace: 'push',
-          animation: 'slide_from_right',
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name={PracticeAppsScreen.BLUE_THEME_LOGIN as keyof RootStackParamList}
+        component={BlueThemeLogin}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name={
+          PracticeAppsScreen.BLUE_THEME_REGISTER as keyof RootStackParamList
+        }
+        component={BlueThemeRegister}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name={
+          PracticeAppsScreen.PINK_THEME_HOMEPAGE as keyof RootStackParamList
+        }
+        component={PinkThemeHomePage}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name={PracticeAppsScreen.PINK_THEME_LOGIN as keyof RootStackParamList}
+        component={PinkThemeLoginPage}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'fade',
+        }}
+      />
+      <Stack.Screen
+        name={PracticeAppsScreen.PINK_THEME_REGISTER as keyof RootStackParamList}
+        component={PinkThemeRegisterPage}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'fade',
         }}
       />
     </Stack.Navigator>
