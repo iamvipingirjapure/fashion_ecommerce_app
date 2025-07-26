@@ -1,8 +1,11 @@
 import {Image, Pressable, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { blueImage1, blueImage2, blueImage3 } from './assets/images';
+import { useNavigation } from '@react-navigation/native';
+import { PracticeAppsScreen } from '../../PracticeAppsScreen';
 
 const HomePage = () => {
+    const navigation :any= useNavigation()
   return (
    <SafeAreaView style={{ flex: 1 }}>
   <View style={{ flex: 1, position: 'relative' }}>
@@ -24,6 +27,7 @@ const HomePage = () => {
     <Text style={{ zIndex: 1000, position: 'relative' ,fontSize:42,top:180,left:40}}>Lorem</Text>
     <Text style={{ zIndex: 1000, position: 'relative' ,fontSize:22,top:180,left:40}}>Lorem ipsum</Text>
     <Pressable 
+    onPress={()=>navigation.navigate(PracticeAppsScreen.BLUE_THEME_LOGIN)}
     style={{justifyContent:"center",alignItems:"center",borderWidth:1,height:60,width:140,borderRadius:12,
     alignSelf:"flex-end",
     marginTop:"auto",

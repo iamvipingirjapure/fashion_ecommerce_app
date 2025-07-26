@@ -30,4 +30,16 @@ export const listItems: {
     icon: '',
     path: PracticeAppsScreen.MUSIC_PLAYER,
   },
+  {
+    id: 5,
+    title: 'Blue Theme',
+    icon: '',
+    path: PracticeAppsScreen.BLUE_THEME_HOMEPAGE,
+  },
+    {
+    id: 6,
+    title: 'Pink Theme',
+    icon: '',
+    path: PracticeAppsScreen.PINK_THEME_HOMEPAGE,
+  },
 ];

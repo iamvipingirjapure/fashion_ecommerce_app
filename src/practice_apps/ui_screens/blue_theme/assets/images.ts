@@ -1,3 +1,8 @@
 export const blueImage1 = require('./Rectangle1.png')
 export const blueImage2 = require('./Rectangle2.png')
 export const blueImage3 = require('./Rectangle3.png')
+export const LoginblueImage1 = require('./LoginRectangle1.png')
+export const LoginblueImage2 = require('./LoginRectangle2.png')
+export const googleImage = require('./flat-color-icons_google.png')
+export const appleImage = require('./ant-design_apple-filled.png')
+export const fbImage = require('./logos_facebook.png')

@@ -1,5 +1,12 @@
 import {useState} from 'react';
-import {Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Feather';
 const Login = () => {
@@ -28,7 +35,7 @@ const Login = () => {
           <View style={styles.signupRow}>
             <Text style={styles.signupText}>Don't have an account ? </Text>
             <TouchableOpacity>
-            <Text style={styles.signupLink}>Sign Up</Text>
+              <Text style={styles.signupLink}>Sign Up</Text>
             </TouchableOpacity>
           </View>
         </View>
