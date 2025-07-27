@@ -12,7 +12,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   LoginblueImage2,
   blueImage3,
@@ -25,28 +25,38 @@ import {useNavigation} from '@react-navigation/native';
 import {PracticeAppsScreen} from '../../PracticeAppsScreen';
 
 const BlueThemeRegister = () => {
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation: any = useNavigation();
   const scrollRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     const keyboardShow = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true);
       scrollRef.current?.scrollTo({y: 120, animated: true});
+    });
+
+    const keyboardHide = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
     });
 
     return () => {
       keyboardShow.remove();
+      keyboardHide.remove();
     };
   }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.flex}>
         <ScrollView
           ref={scrollRef}
-          contentContainerStyle={styles.scrollContainer}
-          keyboardShouldPersistTaps="handled">
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={[
+            styles.scrollContainer,
+            isKeyboardVisible && {paddingBottom: 100},
+          ]}>
           <View style={styles.mainWrapper}>
             <Image
               source={LoginblueImage1}
@@ -76,15 +86,14 @@ const BlueThemeRegister = () => {
             <View style={styles.bottomRow}>
               <View style={styles.registerPrompt}>
                 <Text style={styles.registerText}>Already member?</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(PracticeAppsScreen.BLUE_THEME_LOGIN)
+                  }>
                   <Text style={styles.registerLink}>Login</Text>
                 </TouchableOpacity>
               </View>
-              <Pressable
-                onPress={() =>
-                  navigation.navigate(PracticeAppsScreen.BLUE_THEME_LOGIN)
-                }
-                style={styles.loginButton}>
+              <Pressable style={styles.loginButton}>
                 <Text style={styles.loginText}>Register</Text>
               </Pressable>
             </View>
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
     marginTop: 70,
     paddingLeft: 20,
     paddingRight: 50,
-    marginBottom: -10,
+    marginBottom: -90,
     zIndex: 999,
   },
   title: {fontSize: 32, color: '#2F80ED', fontWeight: 'bold'},

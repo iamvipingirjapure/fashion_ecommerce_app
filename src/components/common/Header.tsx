@@ -7,7 +7,7 @@ import { poppins } from '../../utils/fonts';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SCREENS } from '../../navigation/Screens';
 
-const Header = ({ title = '', showNotification = false ,paddingHorizontal=20}) => {
+const Header = ({ title = '', showNotification = false ,paddingHorizontal=16}) => {
   const navigation:any = useNavigation();
 
   return (

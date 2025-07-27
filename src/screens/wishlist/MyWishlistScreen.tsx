@@ -30,7 +30,7 @@ const MyWishlistScreen = () => {
         </TouchableOpacity>
     }
     return <SafeAreaView style={styles.mainContainer}>
-        <Header title="My Wishlist" showNotification />
+        <Header title="My Wishlist" showNotification paddingHorizontal={16} />
         <FlatList data={categories}
             keyExtractor={(category) => category}
             renderItem={(category) => renderCategoryItem(category)}
