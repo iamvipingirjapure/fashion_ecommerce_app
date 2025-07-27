@@ -40,7 +40,6 @@ const IconHorizontalList: React.FC<IconHorizontalListProps> = ({data }) => {
       },
       itemContainer: {
         alignItems: 'center',
-        // marginRight: 15,
       },
       iconWrapper: {
         height:55,
@@ -49,12 +48,10 @@ const IconHorizontalList: React.FC<IconHorizontalListProps> = ({data }) => {
         padding: 15,
         borderRadius: 50,
         marginBottom: 6,
-        // marginRight:25
       },
       icon: {
         width: 30,
         height: 30,
-        // tintColor: '#6B4226',
       },
       label: {
         fontSize: 14,

@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     categoryButton: {
         paddingVertical: 6,
         paddingHorizontal: 16,
-        marginRight: 12,
+        marginRight: 8,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: colors.lightText,
