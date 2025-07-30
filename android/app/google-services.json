@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "200526117766",
+    "project_id": "react-native-84c59",
+    "storage_bucket": "react-native-84c59.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200526117766:android:f15bfeca6ffd3cd5e68a07",
+        "android_client_info": {
+          "package_name": "com.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200526117766-j0lj40a0lq42i2ggkq5vve6udi838e6k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecommerce",
+            "certificate_hash": "7238e5c53b1a70f463e42a75f5e77f363a3880a5"
+          }
+        },
+        {
+          "client_id": "200526117766-fvs59g1nggqefo2gh3p0lf56un349r8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyrC9iWJgXuY2Kp51pbTg8YE4LJhILA9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200526117766-fvs59g1nggqefo2gh3p0lf56un349r8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
