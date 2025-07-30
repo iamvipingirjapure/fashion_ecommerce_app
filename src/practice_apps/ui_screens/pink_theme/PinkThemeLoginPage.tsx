@@ -12,22 +12,28 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { PracticeAppsScreen } from '../../PracticeAppsScreen';
-import { appleImage, fbImage, googleImage } from '../blue_theme/assets/images';
-import { pinkthemeloginbg } from './assets/Images';
-
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useEffect, useRef, useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {PracticeAppsScreen} from '../../PracticeAppsScreen';
+import {appleImage, fbImage, googleImage} from '../blue_theme/assets/images';
+import {pinkthemeloginbg} from './assets/Images';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import { UseNotification } from '../../../notifications/UseNotification';
 const PinkThemeLoginPage = () => {
   const navigation: any = useNavigation();
+  UseNotification()
   const scrollRef = useRef<ScrollView>(null);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
     const showSub = Keyboard.addListener('keyboardDidShow', () => {
       setKeyboardVisible(true);
-      scrollRef.current?.scrollTo({ y: 120, animated: true });
+      scrollRef.current?.scrollTo({y: 120, animated: true});
     });
     const hideSub = Keyboard.addListener('keyboardDidHide', () => {
       setKeyboardVisible(false);
@@ -39,6 +45,21 @@ const PinkThemeLoginPage = () => {
     };
   }, []);
 
+  const handleGoogleLogin = async () => {
+
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog:true});
+      const {idToken}:any = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const userCredential = await auth().signInWithCredential(
+        googleCredential,
+      );
+      console.log('Firebase User:', userCredential.user);
+      // navigation.navigate(PracticeAppsScreen.PINK_THEME_HOMEPAGE);
+    } catch (error) {
+      console.error('Google Sign-In Error:', error);
+    }
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
       <KeyboardAvoidingView
@@ -53,7 +74,7 @@ const PinkThemeLoginPage = () => {
             ref={scrollRef}
             contentContainerStyle={[
               styles.scrollContainer,
-              isKeyboardVisible && { paddingBottom: 80 },
+              isKeyboardVisible && {paddingBottom: 80},
             ]}
             keyboardShouldPersistTaps="handled">
             <View style={styles.mainWrapper}>
@@ -90,8 +111,8 @@ const PinkThemeLoginPage = () => {
 
                 <View style={styles.bottomRow}>
                   <View style={styles.socialWrapper}>
-                    {[googleImage, fbImage, appleImage].map((icon, index) => (
-                      <TouchableOpacity key={index} style={styles.socialIcon}>
+                    {[googleImage,fbImage, appleImage].map((icon, index) => (
+                      <TouchableOpacity key={index} style={styles.socialIcon} onPress={handleGoogleLogin}>
                         <Image source={icon} />
                       </TouchableOpacity>
                     ))}
@@ -119,10 +140,10 @@ const PinkThemeLoginPage = () => {
 };
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1},
-  flex: { flex: 1 ,},
-  scrollContainer: { flexGrow: 1 ,},
-  mainWrapper: { flex: 1},
+  safeArea: {flex: 1},
+  flex: {flex: 1},
+  scrollContainer: {flexGrow: 1},
+  mainWrapper: {flex: 1},
   formWrapper: {
     marginTop: 320,
     paddingLeft: 20,
@@ -200,7 +221,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     marginRight: 5,
-    marginLeft:15
+    marginLeft: 15,
   },
   registerLink: {
     fontSize: 16,
