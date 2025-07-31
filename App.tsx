@@ -4,14 +4,13 @@ import {Alert, StatusBar} from 'react-native';
 import MainNavigations from './src/navigation/MainNavigations';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
-
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useEffect} from 'react';
 import messaging from '@react-native-firebase/messaging';
+import { GOOGLE_WEB_CLIENT_ID } from '@env';
 
 GoogleSignin.configure({
-  webClientId:
-    '200526117766-fvs59g1nggqefo2gh3p0lf56un349r8l.apps.googleusercontent.com',
+  webClientId:GOOGLE_WEB_CLIENT_ID
 });
 
 const App = () => {

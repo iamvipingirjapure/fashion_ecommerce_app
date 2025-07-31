@@ -39,7 +39,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const MainNavigations = () => {
   return (
     <Stack.Navigator
-      initialRouteName={PracticeAppsScreen.PINK_THEME_LOGIN  as any}
+      initialRouteName={"TabNavigator"}
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="SplashScreen"
