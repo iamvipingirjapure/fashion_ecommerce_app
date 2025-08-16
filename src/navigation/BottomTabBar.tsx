@@ -3,14 +3,16 @@ import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import colors from '../config/colors';
+import { SCREENS } from './Screens';
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
+  console.log(state)
   const getIcon = (name: string) => {
     switch (name) {
       case 'HomeScreen':
         return 'home';
-      case 'Cart':
-        return 'feed-tag';
+      case "cart":
+        return 'rocket';
       case 'Favorites':
         return 'heart-fill';
       case 'Chat':
@@ -36,8 +38,11 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({ state, navigation }) => {
             canPreventDefault: true,
           });
 
+          console.log(route.name)
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name as never);
+            if(route.name === 'cart'){
+navigation.navigate(SCREENS.CART_SCREEN)
+            } else navigation.navigate(route.name as never);
           }
         };
 

@@ -1,12 +1,12 @@
-import { Image, View, Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { Image, View, Dimensions, StyleSheet, Text, TouchableOpacity, Pressable } from "react-native"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from "../../config/colors";
 const { width } = Dimensions.get('window');
 const cardWidth = (width - 48) / 2;
 const ItemCard = (props: any) => {
-    const { item } = props
-    return <View style={styles.card}>
+    const { item,handleProductPress } = props
+    return <Pressable style={styles.card} onPress={handleProductPress}>
         {/* <Image source={item.images[0] ?? require('../../../assets/images/SpalshScreenBg.jpg')} style={styles.image} resizeMode="stretch" /> */}
         <Image source={{
             uri: item?.image
@@ -22,7 +22,7 @@ const ItemCard = (props: any) => {
             <Text style={styles.itemTitle}>{item.title}</Text>
         </View>
         <Text style={styles.price}>₹ {item.price}</Text>
-    </View>
+    </Pressable>
 }
 
 

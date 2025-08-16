@@ -7,10 +7,19 @@ const initialState = {
 };
 
 export const GetHomeProducts = createAsyncThunk('GetHomeProducts', async () => {
-  const response = await apiRequest('GET', 'https://fakestoreapi.com/products');
-  if (response) {
-    return response;
-  } else {
+  // const response = await fetch('GET', 'https://fakestoreapi.com/products');
+  // if (response) {
+  //   return response;
+  // } else {
+  //   throw new Error('No products found');
+  // }
+
+  const response =await fetch("https://fakestoreapi.com/products")
+  const data  = await response.json()
+
+  if(data){
+    return data
+  }else{
     throw new Error('No products found');
   }
 });
