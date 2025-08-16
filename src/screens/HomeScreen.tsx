@@ -1,20 +1,19 @@
 import {
+  ActivityIndicator,
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import HomeHeader from '../components/common/HomeHeader';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import colors from '../config/colors';
-import {TouchableOpacity} from 'react-native';
 import PromoSwiper from '../components/promo_swiper/PromoSwiper';
 import TextWithAllButton from '../components/text_with_all_button/TextWithAllButton';
 import IconHorizontalList from '../components/icon_horizontal_list/IconHorizontalList';
@@ -24,6 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {GetHomeProducts} from '../redux/slices/HomeSlice';
 import {AppDispatch} from '../redux/store';
 import {poppins} from '../utils/fonts';
+import {SCREENS} from '../navigation/Screens';
 
 const categoryData = [
   {icon: '', label: 'T-Shirt'},
@@ -32,30 +32,32 @@ const categoryData = [
   {icon: '', label: 'Jacket'},
 ];
 const ALL = 'All';
-const HomeScreen = () => {
+
+const HomeScreen = ({navigation}: any) => {
   const [selectedCategory, setSelectedCategory] = useState(ALL);
   const dispatch: AppDispatch = useDispatch();
   const {homeItems, isLoading} = useSelector((state: any) => state.Home);
 
-  const categories = [
+  const categories: any = [
     ALL,
     ...[
       ...new Set(homeItems?.map((item: {category: string}) => item.category)),
     ],
   ];
+
   useEffect(() => {
     dispatch(GetHomeProducts());
   }, []);
 
-  const renderCategoryItem = (category: {item: string}) => {
-    const isActive = selectedCategory === category.item;
+  const renderCategoryItem = ({item}: {item: string}) => {
+    const isActive = selectedCategory === item;
     return (
       <TouchableOpacity
         style={[styles.categoryButton, isActive && styles.activeCategory]}
-        onPress={() => setSelectedCategory(category.item)}>
+        onPress={() => setSelectedCategory(item)}>
         <Text
           style={[styles.categoryText, isActive && styles.activeCategoryText]}>
-          {category.item?.toUpperCase()}
+          {item?.toUpperCase()}
         </Text>
       </TouchableOpacity>
     );
@@ -67,87 +69,79 @@ const HomeScreen = () => {
       : homeItems.filter(
           (item: {category: string}) => item.category === selectedCategory,
         );
+
+  const handleProductPress = (ItemId: number) => {
+    navigation.navigate(SCREENS.SINGLE_PRODUCT_DETAILS);
+  };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={{flex: 1}}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{paddingHorizontal: 12}}>
-          <HomeHeader />
-          <View style={{flexDirection: 'row', marginVertical: 20}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                borderColor: colors.disabled,
-                borderWidth: 1,
-                height: 45,
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                flex: 1,
-              }}>
-              <Feather
-                name="search"
-                size={25}
-                color={colors.primary}
-                style={{marginRight: 10}}
-              />
-              <TextInput
-                placeholder="Search"
-                placeholderTextColor={'grey'}
-                inputMode="text"
-                style={{
-                  flex: 1,
-                  color: colors.darkText,
-                  borderRadius: 50,
-                }}
-              />
-            </View>
-            <TouchableOpacity
-              style={{
-                height: 45,
-                width: 45,
-                borderRadius: 50,
-                backgroundColor: colors.primary,
-                justifyContent: 'center',
-                alignItems: 'center',
-                elevation: 2,
-                marginLeft: 15,
-              }}>
-              <Ionicons name="filter" color={colors.white} size={25} />
-            </TouchableOpacity>
-          </View>
-          <PromoSwiper />
-          <TextWithAllButton
-            text="Category"
-            buttonText="See All"
-            onButtonPress={() => {}}
-          />
-          <IconHorizontalList data={categoryData} />
-          <FlatList
-            data={categories}
-            keyExtractor={(category: any) => category}
-            renderItem={category =>
-              renderCategoryItem(category as {item: string})
-            }
-            horizontal
-            contentContainerStyle={styles.categoryListContent}
-            showsHorizontalScrollIndicator={false}
-          />
-          <FlatList
-            data={filteredItems}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => <ItemCard item={item} />}
-            numColumns={2}
-            contentContainerStyle={styles.grid}
-            centerContent
-            showsVerticalScrollIndicator={false}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
-          />
-        </ScrollView>
+        <FlatList
+          data={filteredItems}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <ItemCard item={item} handleProductPress={() => handleProductPress(item.id)} />
+          )}
+          numColumns={2}
+          contentContainerStyle={styles.grid}
+          columnWrapperStyle={{justifyContent: 'space-between'}}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={
+            <>
+              <View style={{paddingHorizontal: 12}}>
+                <HomeHeader />
+
+                <View style={styles.searchRow}>
+                  <View style={styles.searchBox}>
+                    <Feather
+                      name="search"
+                      size={25}
+                      color={colors.primary}
+                      style={{marginRight: 10}}
+                    />
+                    <TextInput
+                      placeholder="Search"
+                      placeholderTextColor="grey"
+                      style={styles.searchInput}
+                    />
+                  </View>
+                  <TouchableOpacity style={styles.filterButton}>
+                    <Ionicons name="filter" color={colors.white} size={25} />
+                  </TouchableOpacity>
+                </View>
+
+                <PromoSwiper />
+                <TextWithAllButton
+                  text="Category"
+                  buttonText="See All"
+                  onButtonPress={() => {}}
+                />
+                <IconHorizontalList data={categoryData} />
+                <FlatList
+                  data={categories}
+                  keyExtractor={item => item}
+                  renderItem={renderCategoryItem}
+                  horizontal
+                  contentContainerStyle={styles.categoryListContent}
+                  showsHorizontalScrollIndicator={false}
+                  ListEmptyComponent={<ActivityIndicator size={22} />}
+                />
+              </View>
+            </>
+          }
+          ListEmptyComponent={
+            isLoading ? (
+              <ActivityIndicator size="large" style={{marginTop: 20}} />
+            ) : (
+              <Text style={{textAlign: 'center', marginTop: 20}}>
+                No items found.
+              </Text>
+            )
+          }
+        />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -182,6 +176,35 @@ const styles = StyleSheet.create({
   },
   grid: {
     paddingBottom: 60,
+    paddingHorizontal: 12,
+  },
+  searchRow: {
+    flexDirection: 'row',
+    marginVertical: 20,
+  },
+  searchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: colors.disabled,
+    borderWidth: 1,
+    height: 45,
+    borderRadius: 50,
+    paddingHorizontal: 15,
+    flex: 1,
+  },
+  searchInput: {
+    flex: 1,
+    color: colors.darkText,
+  },
+  filterButton: {
+    height: 45,
+    width: 45,
+    borderRadius: 50,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+    marginLeft: 15,
   },
 });
 

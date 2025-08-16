@@ -21,6 +21,8 @@ import BlueThemeRegister from '../practice_apps/ui_screens/blue_theme/BlueThemeR
 import PinkThemeHomePage from '../practice_apps/ui_screens/pink_theme/PinkThemeHomePage';
 import PinkThemeLoginPage from '../practice_apps/ui_screens/pink_theme/PinkThemeLoginPage';
 import PinkThemeRegisterPage from '../practice_apps/ui_screens/pink_theme/PinkThemeRegisterPage';
+import SingleProdcutDetails from '../screens/product_details/SingleProductDetails';
+import CartScreen from '../screens/cart/CartScreen';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -32,6 +34,7 @@ export type RootStackParamList = {
   NewPasswordScreen: undefined;
   CompleteProfileScreen: undefined;
   NotificationsScreen: undefined;
+  SingleProdcutDetails:undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -82,14 +85,14 @@ const MainNavigations = () => {
         }}
       />
       <Stack.Screen
-        name="CompleteProfileScreen"
+        name={SCREENS.COMPLETE_PROFILE as keyof RootStackParamList}
         component={CompleteProfileScreen}
         options={{
           animation: 'slide_from_right',
         }}
       />
       <Stack.Screen
-        name="NotificationsScreen"
+        name={SCREENS.NOTIFICATIONS as keyof RootStackParamList}
         component={NotificationsScreen}
         options={{
           animation: 'slide_from_right',
@@ -105,6 +108,26 @@ const MainNavigations = () => {
       <Stack.Screen
         name={SCREENS.PRACTICE_APPS as keyof RootStackParamList}
         component={List}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.SINGLE_PRODUCT_DETAILS as keyof RootStackParamList}
+        component={SingleProdcutDetails}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          animationTypeForReplace: 'push',
+          animation: 'slide_from_right',
+        }}
+      />
+       <Stack.Screen
+        name={SCREENS.CART_SCREEN as keyof RootStackParamList}
+        component={CartScreen}
         options={{
           headerShown: false,
           presentation: 'modal',
@@ -144,7 +167,6 @@ const MainNavigations = () => {
           animation: 'slide_from_right',
         }}
       />
-
       <Stack.Screen
         name={PracticeAppsScreen.RUN_ROUTE_FINDER as keyof RootStackParamList}
         component={Login}
@@ -212,7 +234,9 @@ const MainNavigations = () => {
         }}
       />
       <Stack.Screen
-        name={PracticeAppsScreen.PINK_THEME_REGISTER as keyof RootStackParamList}
+        name={
+          PracticeAppsScreen.PINK_THEME_REGISTER as keyof RootStackParamList
+        }
         component={PinkThemeRegisterPage}
         options={{
           headerShown: false,
