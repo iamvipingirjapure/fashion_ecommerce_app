@@ -23,6 +23,7 @@ import PinkThemeLoginPage from '../practice_apps/ui_screens/pink_theme/PinkTheme
 import PinkThemeRegisterPage from '../practice_apps/ui_screens/pink_theme/PinkThemeRegisterPage';
 import SingleProdcutDetails from '../screens/product_details/SingleProductDetails';
 import CartScreen from '../screens/cart/CartScreen';
+import CheckoutScreen from '../screens/checkout/CheckoutScreen';
 
 export type RootStackParamList = {
   SplashScreen: undefined;
@@ -34,7 +35,8 @@ export type RootStackParamList = {
   NewPasswordScreen: undefined;
   CompleteProfileScreen: undefined;
   NotificationsScreen: undefined;
-  SingleProdcutDetails:undefined;
+  SingleProdcutDetails: undefined;
+  [SCREENS.CHECKOUT_SCREEN]: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -42,7 +44,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 const MainNavigations = () => {
   return (
     <Stack.Navigator
-      initialRouteName={"TabNavigator"}
+      initialRouteName={'TabNavigator'}
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="SplashScreen"
@@ -125,7 +127,7 @@ const MainNavigations = () => {
           animation: 'slide_from_right',
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name={SCREENS.CART_SCREEN as keyof RootStackParamList}
         component={CartScreen}
         options={{
@@ -243,6 +245,15 @@ const MainNavigations = () => {
           presentation: 'modal',
           animationTypeForReplace: 'push',
           animation: 'fade',
+        }}
+      />
+
+      <Stack.Screen
+        name={SCREENS.CHECKOUT_SCREEN as keyof RootStackParamList}
+        component={CheckoutScreen}
+        options={{
+          animation: 'slide_from_bottom',
+          presentation: 'modal',
         }}
       />
     </Stack.Navigator>

@@ -7,7 +7,6 @@ import NotificationsScreen from '../screens/notification/NotificationsScreen';
 import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import {SCREENS} from './Screens';
-import CartScreen from '../screens/cart/CartScreen';
 import {TouchableOpacity} from 'react-native';
 
 const Tab = createBottomTabNavigator();

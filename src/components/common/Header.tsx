@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../../config/colors';
 import { poppins } from '../../utils/fonts';
@@ -14,7 +15,7 @@ const Header = ({ title = '', showNotification = false ,paddingHorizontal=16}) =
     <SafeAreaView style={styles.safeArea}>
       <View style={[styles.container,{paddingHorizontal}]}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Octicons name="arrow-left" size={20} color={colors.primary} />
+          <FontAwesome6 name="arrow-left-long" size={20} color={colors.darkText} />
         </TouchableOpacity>
 
         <Text style={styles.title}>{title}</Text>
@@ -34,7 +35,6 @@ const Header = ({ title = '', showNotification = false ,paddingHorizontal=16}) =
 
 const styles = StyleSheet.create({
   safeArea: {
-    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   container: {
     height: 56,
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   backButton: {
-    width: 38,
-    height: 38,
+    width: 46,
+    height: 46,
     borderRadius: 24,
     borderWidth: 1,
     borderColor: colors.lightText,

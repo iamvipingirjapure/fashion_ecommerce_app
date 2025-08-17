@@ -14,9 +14,9 @@ const HomeHeader = () => {
         <View style={{ flex: 1 }}>
             <AppText fontSize={14} style={{ color: 'black' }}>Location</AppText>
             <View style={{ flexDirection: "row", marginTop: 15, alignItems: 'center' }}>
-                <FontAwesome6 name="location-dot" color={colors.darkText} size={20} />
+                <FontAwesome6 name="location-dot" color={colors.primary} size={20} />
                 <AppText fontSize={16} style={{ marginHorizontal: 8, fontWeight: 600 }}>New York,USA</AppText>
-                <FontAwesome6 name="angle-down" color={colors.darkText} size={20} />
+                <FontAwesome6 name="angle-down" color={colors.primary} size={20} />
             </View>
         </View>
 
@@ -33,7 +33,7 @@ const HomeHeader = () => {
         }
         onPress={() => navigation.navigate(SCREENS.NOTIFICATIONS)}
         >
-            <Ionicons name="notifications" color={colors.bottomMenuBarBg} size={25} />
+            <Ionicons name="notifications" color={colors.primary} size={25} />
         </TouchableOpacity>
     </SafeAreaView>
 }
