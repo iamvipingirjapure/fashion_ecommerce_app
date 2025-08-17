@@ -22,7 +22,7 @@ import {s, vs} from 'react-native-size-matters';
 import {Swipeable} from 'react-native-gesture-handler';
 import {SCREENS} from '../../navigation/Screens';
 
-const CartScreen = ({navigation}: {navigation: {navigate: any}}) => {
+const ShippingAddressScreen = ({navigation}: {navigation: {navigate: any}}) => {
   const renderRightActions = () => (
     <TouchableOpacity style={styles.deleteBox} onPress={() => {}}>
       <Octicons name="trash" size={24} color={colors.white} />
@@ -126,7 +126,7 @@ const CartScreen = ({navigation}: {navigation: {navigate: any}}) => {
   );
 };
 
-export default CartScreen;
+export default ShippingAddressScreen;
 
 const styles = StyleSheet.create({
   safeArea: {
