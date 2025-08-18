@@ -1,7 +1,7 @@
 export const SCREENS = {
     NOTIFICATIONS : 'Notifications',
-    SPLASH: 'SplashScreen',
-    WELCOME: 'WelcomeScreen',
+    SPLASH_SCREEN: 'SplashScreen',
+    WELCOME_SCREEN: 'WelcomeScreen',
     AUTH: 'AuthScreen',
     OTP_VERIFY: 'OtpVerifyScreen',
     NEW_PASSWORD: 'NewPasswordScreen',
@@ -12,4 +12,8 @@ export const SCREENS = {
     SINGLE_PRODUCT_DETAILS : "SINGLE_PRODUCT_DETAILS",
     CART_SCREEN : "CART_SCREEN",
     CHECKOUT_SCREEN : "CHECKOUT_SCREEN",
-}
+    SHIPPING_ADDRESS : "SHIPPING_ADDRESS",
+    CHOOSE_SHIPPING : "CHOOSE_SHIPPING",
+    PAYMENT_METHODS_SCREEN : "PAYMENT_METHODS_SCREEN",
+    ADD_CARD : "ADD_CARD",
+} as const

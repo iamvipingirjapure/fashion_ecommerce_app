@@ -299,6 +299,6 @@ const styles = StyleSheet.create({
     fontSize: s(18),
     fontWeight: '600',
     textAlign: 'center',
-    paddingVertical: vs(10),
+    paddingVertical: vs(6),
   },
 });
