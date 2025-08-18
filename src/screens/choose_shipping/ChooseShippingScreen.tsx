@@ -1,104 +1,91 @@
 import {
   FlatList,
   Image,
+  Modal,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
+  TextInput,
+  Dimensions,
+  Animated,
+  Easing,
 } from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import Header from '../../components/common/Header';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import colors from '../../config/colors';
 import {s, vs} from 'react-native-size-matters';
-import {Swipeable} from 'react-native-gesture-handler';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { SCREENS } from '../../navigation/Screens';
+import {SCREENS} from '../../navigation/Screens';
+import Feather from 'react-native-vector-icons/Feather';
+import {RootStackParamList} from '../../navigation/MainNavigations';
+import {StackScreenProps} from '@react-navigation/stack';
 
-const CheckoutScreen = ({navigation}:any) => {
-  const renderRightActions = () => (
-    <TouchableOpacity style={styles.deleteBox} onPress={() => {}}>
-      <Octicons name="trash" size={24} color={colors.white} />
-    </TouchableOpacity>
-  );
-
+type ChooseShippingScreenProps = StackScreenProps<
+  RootStackParamList,
+  typeof SCREENS.CHOOSE_SHIPPING
+>;
+const ChooseShippingScreen = ({navigation}: ChooseShippingScreenProps) => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Header title="Checkout" />
-      <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Shopping Address</Text>
-        <View style={styles.addressContainer}>
-          <SimpleLineIcons name="location-pin" size={s(20)} />
-          <View style={styles.addressDetails}>
-            <Text style={styles.addressTitle}>Home</Text>
-            <View style={styles.addressRow}>
-              <Text style={styles.addressText}>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-                dignissimos mollitia? Corporis.
-              </Text>
-              <TouchableOpacity style={styles.changeBtn}>
-                <Text style={styles.changeBtnText}>Change</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-
-        <Text style={styles.sectionTitle}>Choose Shipping Type</Text>
-        <View style={styles.shippingContainer}>
-          <SimpleLineIcons name="location-pin" size={s(20)} />
-          <View style={styles.addressDetails}>
-            <Text style={styles.addressTitle}>Economy</Text>
-            <View style={styles.addressRow}>
-              <Text style={styles.addressText}>
-                Lorem, ipsum dolor sit amet.
-              </Text>
-              <TouchableOpacity style={styles.changeBtn}>
-                <Text style={styles.changeBtnText}>Change</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-
-        <Text style={styles.sectionTitle}>Order History</Text>
-      </View>
-
+      <Header title="Choose Shipping" />
       <FlatList
-        data={new Array(10)}
+        data={new Array(4)}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{borderBottomWidth: 1, borderColor: colors.ligtShadow}}
+          />
+        )}
         renderItem={() => {
           return (
-            <Swipeable renderRightActions={renderRightActions}>
-              <View style={styles.cartItemContainer}>
-                <Image
-                  source={{
-                    uri: 'https://randomuser.me/api/portraits/men/3.jpg',
-                  }}
-                  style={styles.image}
-                />
-                <View style={styles.cartDetails}>
-                  <Text style={styles.itemTitle}>Brown Jacket</Text>
-                  <Text style={styles.itemSize}>Size : {'XL'}</Text>
-                  <View style={styles.priceQtyRow}>
-                    <Text style={styles.itemPrice}>${'85.00'}</Text>
-                  </View>
+            <View style={styles.addressContainer}>
+              <Feather name="truck" size={s(20)} />
+              <View style={styles.addressDetails}>
+                <Text style={styles.addressTitle}>Economy</Text>
+                <View style={styles.addressRow}>
+                  <Text style={styles.addressText}>
+                    Lorem, ipsum dolor sit amet consectetur.
+                  </Text>
+                  <TouchableOpacity
+                    style={{
+                      height: 24,
+                      width: 24,
+                      borderWidth: 1,
+                      borderRadius: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginRight: s(12),
+                    }}>
+                    <View
+                      style={{
+                        height: 12,
+                        width: 12,
+                        borderRadius: 50,
+                        backgroundColor: true ? colors.primary : 'transparent',
+                      }}></View>
+                  </TouchableOpacity>
                 </View>
               </View>
-            </Swipeable>
+            </View>
           );
         }}
-        style={styles.flatList}
+        style={{borderWidth: 0, padding: s(12)}}
       />
-
       <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.checkoutButton} onPress={()=>navigation.navigate(SCREENS.SHIPPING_ADDRESS)}>
-          <Text style={styles.checkoutButtonText}>Continue to Payment</Text>
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => navigation.navigate(SCREENS.PAYMENT_METHODS_SCREEN)}>
+          <Text style={styles.checkoutButtonText}>Apply</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export default CheckoutScreen;
+export default ChooseShippingScreen;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -115,18 +102,17 @@ const styles = StyleSheet.create({
   addressContainer: {
     flexDirection: 'row',
     marginVertical: s(12),
-    borderBottomWidth: 1,
-    borderColor: colors.ligtShadow,
     paddingBottom: s(22),
   },
   addressDetails: {
     flex: 1,
-    marginHorizontal: s(4),
+    marginHorizontal: s(8),
   },
   addressTitle: {
-    fontSize: s(14),
+    fontSize: s(16),
     fontWeight: '500',
     color: colors.primary,
+    marginTop:vs(-3)
   },
   addressRow: {
     flexDirection: 'row',

@@ -1,14 +1,14 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from '../screens/SplashScreen';
 import {TabNavigator} from './TabNaviagtor';
+import {SCREENS} from './Screens';
+import SplashScreen from '../screens/SplashScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AuthScreen from '../screens/auth/AuthScreen';
 import OtpVerifyScreen from '../screens/auth/OtpVerifyScreen';
 import NewPasswordScreen from '../screens/auth/NewPasswordScreen';
 import CompleteProfileScreen from '../screens/auth/CompleteProfileScreen';
 import NotificationsScreen from '../screens/notification/NotificationsScreen';
-import {SCREENS} from './Screens';
 import List from '../practice_apps/changing_background_color/List';
 import {PracticeAppsScreen} from '../practice_apps/PracticeAppsScreen';
 import ChangingBgColour from '../practice_apps/changing_background_color/ChangingBgColor';
@@ -24,19 +24,26 @@ import PinkThemeRegisterPage from '../practice_apps/ui_screens/pink_theme/PinkTh
 import SingleProdcutDetails from '../screens/product_details/SingleProductDetails';
 import CartScreen from '../screens/cart/CartScreen';
 import CheckoutScreen from '../screens/checkout/CheckoutScreen';
+import ShippingAddressScreen from '../screens/shipping_address/ShippingAddressScreen';
+import ChooseShippingScreen from '../screens/choose_shipping/ChooseShippingScreen';
+import PaymentMethodsScreen from '../screens/payment_methods/PaymentMethodsScreen';
+import AddCardScreen from '../screens/addCard/AddCardScreen';
 
 export type RootStackParamList = {
-  SplashScreen: undefined;
-  HomeScreen: undefined;
-  WelcomeScreen: undefined;
-  AuthScreen: undefined;
-  TabNavigator: undefined;
-  OtpVerifyScreen: undefined;
-  NewPasswordScreen: undefined;
-  CompleteProfileScreen: undefined;
-  NotificationsScreen: undefined;
-  SingleProdcutDetails: undefined;
+  [SCREENS.SPLASH_SCREEN]: undefined;
+  [SCREENS.WELCOME_SCREEN]: undefined;
+  [SCREENS.AUTH]: undefined;
+  [SCREENS.TAB_NAVIGATOR]: undefined;
+  [SCREENS.OTP_VERIFY]: undefined;
+  [SCREENS.NEW_PASSWORD]: undefined;
+  [SCREENS.COMPLETE_PROFILE]: undefined;
+  [SCREENS.NOTIFICATIONS_SCREEN]: undefined;
+  [SCREENS.SINGLE_PRODUCT_DETAILS]: undefined;
   [SCREENS.CHECKOUT_SCREEN]: undefined;
+  [SCREENS.SHIPPING_ADDRESS]: undefined;
+  [SCREENS.CHOOSE_SHIPPING]: undefined;
+  [SCREENS.PAYMENT_METHODS_SCREEN]: undefined;
+  [SCREENS.ADD_CARD]: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -254,6 +261,35 @@ const MainNavigations = () => {
         options={{
           animation: 'slide_from_bottom',
           presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.CHOOSE_SHIPPING}
+        component={ChooseShippingScreen}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.SHIPPING_ADDRESS}
+        component={ShippingAddressScreen}
+        options={{
+          animation: 'slide_from_right',
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.PAYMENT_METHODS_SCREEN}
+        component={PaymentMethodsScreen}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.ADD_CARD}
+        component={AddCardScreen}
+        options={{
+          animation: 'slide_from_right',
         }}
       />
     </Stack.Navigator>
