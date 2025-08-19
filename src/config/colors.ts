@@ -17,6 +17,7 @@ const colors = {
     darkGrey: '#E5E5E5',
     error: 'red',
     disabled:'#a5a5a5',
+    lightColorBg:'#f3e9dd',
   };
   
   export default colors;

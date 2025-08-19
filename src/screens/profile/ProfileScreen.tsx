@@ -21,7 +21,7 @@ import { SCREENS } from "../../navigation/Screens";
 
 const profileOptions = [
     { icon: "user", label: "Practice Apps",lib:'Feather',navigation:SCREENS.PRACTICE_APPS },
-    { icon: "credit-card", label: "Payment Methods", lib: "Feather" },
+    { icon: "credit-card", label: "Payment Methods", lib: "Feather",navigation:SCREENS.PAYMENT_METHODS_SCREEN },
     { icon: "clipboard", label: "My Orders", lib: "Feather" },
     { icon: "settings", label: "Settings",lib:'Feather' },
     { icon: "help-circle", label: "Help Center",lib:'Feather' },
@@ -95,7 +95,6 @@ const ProfileScreen: React.FC = ({navigation}:any) => {
 
     const handleImageResponse = (response: any) => {
         if (response.didCancel || response.errorCode) {
-            console.warn('Image selection cancelled or failed');
         } else if (response.assets && response.assets.length > 0) {
             setProfileImage(response.assets[0].uri || null);
         }

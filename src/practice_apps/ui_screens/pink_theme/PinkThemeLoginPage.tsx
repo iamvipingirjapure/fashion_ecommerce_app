@@ -54,7 +54,6 @@ const PinkThemeLoginPage = () => {
       const userCredential = await auth().signInWithCredential(
         googleCredential,
       );
-      console.log('Firebase User:', userCredential.user);
       // navigation.navigate(PracticeAppsScreen.PINK_THEME_HOMEPAGE);
     } catch (error) {
       console.error('Google Sign-In Error:', error);

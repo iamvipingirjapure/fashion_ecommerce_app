@@ -1,25 +1,24 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
-import Icon from 'react-native-vector-icons/Octicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import colors from '../config/colors';
 import {SCREENS} from './Screens';
+import { s, vs } from 'react-native-size-matters';
 
 const BottomTabBar: React.FC<BottomTabBarProps> = ({state, navigation}) => {
   const getIcon = (name: string) => {
     switch (name) {
       case 'HomeScreen':
-        return 'home';
+        return 'home-outline';
       case 'cart':
-        return 'rocket';
-      case 'Favorites':
-        return 'heart-fill';
-      case 'Chat':
-        return 'chat-bubble-outline';
+        return 'bag-outline';
+      case SCREENS.WISHLIST_SCREEN:
+        return 'heart-outline';
       case 'Profile':
-        return 'person';
-      case 'Notifications':
-        return 'bell';
+        return 'person-outline';
+      case 'Chat':
+        return 'chatbox-outline';
       default:
         return 'home';
     }
@@ -52,7 +51,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({state, navigation}) => {
             <View style={isFocused ? styles.iconWrapper : undefined}>
               <Icon
                 name={getIcon(route.name)}
-                size={20}
+                size={s(20)}
                 color={isFocused ? colors.primary : colors.grey}
               />
             </View>
@@ -72,12 +71,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: colors.bottomMenuBarBg,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: vs(8),
     borderRadius: 40,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 20,
+    marginHorizontal: s(10),
     marginBottom: Platform.OS === 'ios' ? 20 : 10,
     position: 'absolute',
     left: 0,

@@ -106,7 +106,7 @@ const AddCardScreen = ({navigation}: PaymentMethodsScreenProps) => {
         <View style={styles.footerContainer}>
           <TouchableOpacity
             style={styles.checkoutButton}
-            onPress={() => navigation.navigate(SCREENS.SHIPPING_ADDRESS)}>
+            onPress={() => navigation.goBack()}>
             <Text style={styles.checkoutButtonText}>Add Card</Text>
           </TouchableOpacity>
         </View>

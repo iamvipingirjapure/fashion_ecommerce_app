@@ -15,6 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/common/Header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from '../../config/colors';
+import {s, vs} from 'react-native-size-matters';
 
 const {width} = Dimensions.get('window');
 
@@ -52,7 +53,13 @@ const SingleProdcutDetails = () => {
   }, []);
 
   if (!product)
-    return <ActivityIndicator style={{marginTop: 50}} size="large" />;
+    return (
+      <ActivityIndicator
+        style={{marginTop: 50}}
+        size="large"
+        color={colors.primary}
+      />
+    );
 
   const imagesToShow = product.images.slice(0, 5);
   const remainingCount = product.images.length - imagesToShow.length;
@@ -75,42 +82,150 @@ const SingleProdcutDetails = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Product Details" showNotification />
-      <View style={{}}>
-        <Image
-          source={{uri: mainImage ?? product.main_image}}
-          style={styles.mainImage}
-        />
-        <FlatList
-          data={imagesToShow}
-          renderItem={renderThumbnail}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.thumbnailList}
-          keyExtractor={(_, idx) => idx.toString()}
-        />
-      </View>
-
-      <ScrollView contentContainerStyle={styles.details}>
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Text style={styles.subtitle}>{product.category}</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
-            <FontAwesome name="star" color={colors.secondary} size={22} />
-            <Text style={{fontSize: 19, color: colors.grey}}>
-              {product.rating}
-            </Text>
+      <Header title="Product Details" showWishlistButton />
+      <ScrollView>
+        <View style={{position: 'relative'}}>
+          <Image
+            source={{uri: mainImage ?? product.main_image}}
+            style={styles.mainImage}
+          />
+          <FlatList
+            data={imagesToShow}
+            renderItem={renderThumbnail}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.thumbnailList}
+            keyExtractor={(_, idx) => idx.toString()}
+            style={{position: 'absolute', bottom: vs(15), alignSelf: 'center'}}
+          />
+        </View>
+        <View style={{backgroundColor:colors.whiteBackground}}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: colors.whiteBackground,
+              paddingHorizontal: s(10),
+              paddingVertical: vs(20),
+            }}>
+            <View
+              style={{
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: colors.whiteBackground,
+              }}>
+              <Text style={styles.subtitle}>{product.category}</Text>
+              <View
+                style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
+                <FontAwesome name="star" color={colors.secondary} size={22} />
+                <Text style={{fontSize: 19, color: colors.grey}}>
+                  {product.rating}
+                </Text>
+              </View>
+            </View>
+            <Text style={styles.title}>{product.name}</Text>
+            <Text style={styles.subHeading}>Product Details</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Text style={styles.subHeading}>Select Size</Text>
+            <View
+              style={{
+                minHeight: vs(40),
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: s(6),
+              }}>
+              {['S', 'M', 'L', 'XL', 'XXL', 'XXXL'].map(item => {
+                return (
+                  <TouchableOpacity
+                    style={{
+                      height: vs(40),
+                      paddingHorizontal: s(15),
+                      borderWidth: 1,
+                      borderColor: colors.ligtShadow,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderRadius: 12,
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: s(14),
+                        fontWeight: '500',
+                        color: colors.primary,
+                        textAlign: 'center',
+                      }}>
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.subHeading}>Select Color : </Text>
+              <Text style={{...styles.subHeading, color: 'brown'}}>
+                Select Color
+              </Text>
+            </View>
+            <View
+              style={{
+                minHeight: vs(40),
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
+                flexWrap: 'wrap',
+                gap: s(10),
+              }}>
+              {['tomato', 'lightgrey', 'lightpink', 'lightblue', 'salmon'].map(
+                item => {
+                  return (
+                    <TouchableOpacity
+                      style={{
+                        height: vs(30),
+                        width: s(31),
+                        backgroundColor: item,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderRadius: 52,
+                      }}>
+                      {false && (
+                        <View
+                          style={{
+                            height: vs(14),
+                            width: s(14),
+                            backgroundColor: colors.whiteBackground,
+                            borderRadius: 55,
+                          }}
+                        />
+                      )}
+                    </TouchableOpacity>
+                  );
+                },
+              )}
+            </View>
+          </View>
+          <View style={styles.footerContainer}>
+            <View>
+              <Text style={{color: colors.lightText, fontSize: s(16)}}>
+                Total Price
+              </Text>
+              <Text style={{color: colors.primary, fontSize: s(18),fontWeight:'600'}}>
+                $88.76
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.ViewOrderBtn}
+              // onPress={() => navigation.navigate(SCREENS.SHIPPING_ADDRESS)}
+            >
+              <Ionicons
+                name="bag"
+                size={s(22)}
+                color={colors.whiteBackground}
+              />
+              <Text style={styles.checkoutButtonText}>Add to Cart</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <Text style={styles.title}>{product.name}</Text>
-        <Text style={styles.price}>
-          {product.currency} ${product.price.toFixed(2)}
-        </Text>
-        <Text style={styles.description}>{product.description}</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,43 +234,39 @@ const SingleProdcutDetails = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'salmon',
+    backgroundColor: colors.lightColorBg,
   },
   header: {
     marginTop: 40,
-    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#222',
   },
   iconButton: {
     padding: 8,
   },
   mainImage: {
-    width: width,
-    height: width,
-    resizeMode: 'contain',
+    height: vs(300),
+    resizeMode: 'stretch',
+    marginHorizontal: s(10),
+    marginTop: vs(20),
   },
   thumbnailList: {
-    gap: 12,
+    gap: s(8),
     alignSelf: 'center',
     justifyContent: 'center',
     marginHorizontal: 'auto',
-    borderWidth: 1,
-    padding: 12,
+    padding: s(6),
+    zIndex: 99999,
+    borderRadius: 12,
+    backgroundColor: colors.whiteBackground,
   },
   thumbnailWrapper: {
-    borderWidth: 1,
     borderRadius: 8,
   },
   thumbnail: {
-    width: 60,
-    height: 60,
+    width: s(50),
+    height: vs(50),
     borderRadius: 8,
     resizeMode: 'stretch',
   },
@@ -175,16 +286,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   title: {
-    fontSize: 22,
+    fontSize: s(20),
     fontWeight: '600',
-    marginTop: 5,
-    marginBottom:15
+    marginTop: vs(1),
+    marginBottom: vs(2),
+    color: colors.darkText,
   },
-    subtitle: {
-    fontSize: 22,
+  subtitle: {
+    fontSize: s(18),
     fontWeight: '600',
     marginVertical: 10,
-    color:colors.grey
+    color: colors.grey,
+  },
+  subHeading: {
+    fontSize: s(18),
+    fontWeight: '600',
+    marginVertical: vs(15),
   },
   price: {
     fontSize: 20,
@@ -193,9 +310,48 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   description: {
-    fontSize: 16,
-    color: '#555',
-    lineHeight: 22,
+    fontSize: s(16),
+    color: colors.lightText,
+    lineHeight: 25,
+    paddingBottom: vs(20),
+    borderBottomWidth: 1,
+    borderBottomColor: colors.ligtShadow,
+  },
+  footerContainer: {
+    paddingHorizontal: s(12),
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    borderTopRightRadius: 18,
+    borderTopLeftRadius: 18,
+    borderWidth: 0.4,
+    backgroundColor: colors.white,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  ViewOrderBtn: {
+    backgroundColor: colors.primary,
+    borderRadius: 55,
+    paddingVertical: vs(5),
+    paddingHorizontal: s(40),
+    marginVertical: vs(10),
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: s(10),
+  },
+  checkoutButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 55,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+    marginVertical: 15,
+  },
+  checkoutButtonText: {
+    color: colors.white,
+    fontSize: s(18),
+    fontWeight: '600',
+    textAlign: 'center',
+    paddingVertical: vs(6),
   },
 });
 

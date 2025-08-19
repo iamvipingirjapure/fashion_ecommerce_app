@@ -87,7 +87,7 @@ const CartScreen = ({navigation}: {navigation: {navigate: any}}) => {
                   placeholder="Promo Code"
                   placeholderTextColor={colors.lightText}
                 />
-                <TouchableOpacity style={styles.promoButton}>
+                <TouchableOpacity style={styles.promoButton} onPress={()=>navigation.navigate(SCREENS.COUPON_SCREEN)}>
                   <Text style={styles.promoButtonText}>Apply</Text>
                 </TouchableOpacity>
               </View>
