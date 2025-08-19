@@ -1,17 +1,4 @@
-import {
-  FlatList,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  TextInput,
-  Dimensions,
-  Animated,
-  Easing,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import Header from '../../components/common/Header';
@@ -20,7 +7,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../config/colors';
 import {s, vs} from 'react-native-size-matters';
 import {SCREENS} from '../../navigation/Screens';
-import Feather from 'react-native-vector-icons/Feather';
 import {RootStackParamList} from '../../navigation/MainNavigations';
 import {StackScreenProps} from '@react-navigation/stack';
 
@@ -28,14 +14,17 @@ type PaymentMethodsScreenProps = StackScreenProps<
   RootStackParamList,
   typeof SCREENS.PAYMENT_METHODS_SCREEN
 >;
-const PaymentMethodsScreen = ({navigation}: PaymentMethodsScreenProps) => {
+const PaymentMethodsScreen = ({
+  navigation,
+  route,
+}: PaymentMethodsScreenProps) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header title="Payment Methods" />
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Credit and Debit Card</Text>
         <TouchableOpacity
-          onPress={()=>navigation.navigate(SCREENS.ADD_CARD)}
+          onPress={() => navigation.navigate(SCREENS.ADD_CARD)}
           style={{
             borderWidth: 1,
             borderColor: colors.ligtShadow,
@@ -82,7 +71,6 @@ const PaymentMethodsScreen = ({navigation}: PaymentMethodsScreenProps) => {
               <View style={styles.addressDetails}>
                 <Text style={styles.addressTitle}>PayPal</Text>
                 <TouchableOpacity
-
                   style={{
                     height: 28,
                     width: 28,
@@ -111,17 +99,26 @@ const PaymentMethodsScreen = ({navigation}: PaymentMethodsScreenProps) => {
           borderColor: colors.ligtShadow,
           borderRadius: 12,
           padding: s(10),
-          flexGrow:0
+          flexGrow: 0,
         }}
       />
-      <View style={styles.footerContainer}>
-        <TouchableOpacity
-          style={styles.checkoutButton}
-          // onPress={() => navigation.navigate(SCREENS.SHIPPING_ADDRESS)}
-        >
-          <Text style={styles.checkoutButtonText}>Confirm Payment</Text>
-        </TouchableOpacity>
-      </View>
+      {route.params?.from && (
+        <View style={styles.footerContainer}>
+          <TouchableOpacity
+            style={styles.checkoutButton}
+            onPress={() =>
+              navigation.reset({
+                index: 1,
+                routes: [
+                  {name: 'TabNavigator'},
+                  {name: SCREENS.PAYMENT_SUCCESS_SCREEN},
+                ],
+              })
+            }>
+            <Text style={styles.checkoutButtonText}>Confirm Payment</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

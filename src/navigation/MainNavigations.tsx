@@ -28,6 +28,10 @@ import ShippingAddressScreen from '../screens/shipping_address/ShippingAddressSc
 import ChooseShippingScreen from '../screens/choose_shipping/ChooseShippingScreen';
 import PaymentMethodsScreen from '../screens/payment_methods/PaymentMethodsScreen';
 import AddCardScreen from '../screens/addCard/AddCardScreen';
+import PaymentSuccessScreen from '../screens/payment_success/PaymentSuccessScreen';
+import CouponScreen from '../screens/coupon/CouponScreen';
+import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
+import FilterScreen from '../screens/filter/FilterScreen';
 
 export type RootStackParamList = {
   [SCREENS.SPLASH_SCREEN]: undefined;
@@ -42,8 +46,14 @@ export type RootStackParamList = {
   [SCREENS.CHECKOUT_SCREEN]: undefined;
   [SCREENS.SHIPPING_ADDRESS]: undefined;
   [SCREENS.CHOOSE_SHIPPING]: undefined;
-  [SCREENS.PAYMENT_METHODS_SCREEN]: undefined;
+  [SCREENS.PAYMENT_METHODS_SCREEN]:
+    | {from: keyof RootStackParamList}
+    | undefined;
   [SCREENS.ADD_CARD]: undefined;
+  [SCREENS.PAYMENT_SUCCESS_SCREEN]: undefined;
+  [SCREENS.COUPON_SCREEN]: undefined;
+  [SCREENS.WISHLIST_SCREEN]: undefined;
+  [SCREENS.FILTER_SCREEN]: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -259,7 +269,7 @@ const MainNavigations = () => {
         name={SCREENS.CHECKOUT_SCREEN as keyof RootStackParamList}
         component={CheckoutScreen}
         options={{
-          animation: 'slide_from_bottom',
+          animation: 'slide_from_left',
           presentation: 'modal',
         }}
       />
@@ -290,6 +300,37 @@ const MainNavigations = () => {
         component={AddCardScreen}
         options={{
           animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.PAYMENT_SUCCESS_SCREEN}
+        component={PaymentSuccessScreen}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.COUPON_SCREEN}
+        component={CouponScreen}
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.WISHLIST_SCREEN}
+        component={MyWishlistScreen}
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.FILTER_SCREEN}
+        component={FilterScreen}
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: false,
         }}
       />
     </Stack.Navigator>

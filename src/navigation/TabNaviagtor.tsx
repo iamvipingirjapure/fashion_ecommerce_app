@@ -39,7 +39,7 @@ export const TabNavigator = () => (
       })}
     />
     <Tab.Screen
-      name="Favorites"
+      name={SCREENS.WISHLIST_SCREEN}
       component={MyWishlistScreen}
       options={{
         tabBarIcon: ({color, size}) => (
@@ -48,7 +48,7 @@ export const TabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name={SCREENS.NOTIFICATIONS}
+      name={"Chat"}
       component={NotificationsScreen}
       options={{
         animation: 'shift',

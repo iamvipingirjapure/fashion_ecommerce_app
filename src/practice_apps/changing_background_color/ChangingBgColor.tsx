@@ -12,7 +12,6 @@ const ChangingBgColour = () => {
             color+= hexValues[Math.floor(Math.random()*16)] 
         }
         setRandomColor(color)
-        console.log(color)
     }
   return (
     <>

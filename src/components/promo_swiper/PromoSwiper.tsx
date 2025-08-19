@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     slide: {
         flexDirection: 'row',
-        backgroundColor: '#f3e9dd',
+        backgroundColor: colors.lightColorBg,
         borderRadius: 20,
         padding: 20,
         alignItems: 'center',

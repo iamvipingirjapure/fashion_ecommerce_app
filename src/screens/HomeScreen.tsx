@@ -24,6 +24,7 @@ import {GetHomeProducts} from '../redux/slices/HomeSlice';
 import {AppDispatch} from '../redux/store';
 import {poppins} from '../utils/fonts';
 import {SCREENS} from '../navigation/Screens';
+import {s} from 'react-native-size-matters';
 
 const categoryData = [
   {icon: '', label: 'T-Shirt'},
@@ -83,58 +84,66 @@ const HomeScreen = ({navigation}: any) => {
           data={filteredItems}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
-            <ItemCard item={item} handleProductPress={() => handleProductPress(item.id)} />
+            <ItemCard
+              item={item}
+              handleProductPress={() => handleProductPress(item.id)}
+            />
           )}
           numColumns={2}
           contentContainerStyle={styles.grid}
           columnWrapperStyle={{justifyContent: 'space-between'}}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
-            <>
-              <View style={{paddingHorizontal: 12}}>
-                <HomeHeader />
-
-                <View style={styles.searchRow}>
-                  <View style={styles.searchBox}>
-                    <Feather
-                      name="search"
-                      size={25}
-                      color={colors.primary}
-                      style={{marginRight: 10}}
-                    />
-                    <TextInput
-                      placeholder="Search"
-                      placeholderTextColor="grey"
-                      style={styles.searchInput}
-                    />
-                  </View>
-                  <TouchableOpacity style={styles.filterButton}>
-                    <Ionicons name="filter" color={colors.white} size={25} />
-                  </TouchableOpacity>
+            <View>
+              <HomeHeader />
+              <View style={styles.searchRow}>
+                <View style={styles.searchBox}>
+                  <Feather
+                    name="search"
+                    size={25}
+                    color={colors.primary}
+                    style={{marginRight: 10}}
+                  />
+                  <TextInput
+                    placeholder="Search"
+                    placeholderTextColor="grey"
+                    style={styles.searchInput}
+                  />
                 </View>
-
-                <PromoSwiper />
-                <TextWithAllButton
-                  text="Category"
-                  buttonText="See All"
-                  onButtonPress={() => {}}
-                />
-                <IconHorizontalList data={categoryData} />
-                <FlatList
-                  data={categories}
-                  keyExtractor={item => item}
-                  renderItem={renderCategoryItem}
-                  horizontal
-                  contentContainerStyle={styles.categoryListContent}
-                  showsHorizontalScrollIndicator={false}
-                  ListEmptyComponent={<ActivityIndicator size={22} />}
-                />
+                <TouchableOpacity
+                  style={styles.filterButton}
+                  onPress={() => navigation.navigate(SCREENS.FILTER_SCREEN)}>
+                  <Ionicons name="filter" color={colors.white} size={25} />
+                </TouchableOpacity>
               </View>
-            </>
+
+              <PromoSwiper />
+              <TextWithAllButton
+                text="Category"
+                buttonText="See All"
+                onButtonPress={() => {}}
+              />
+              <IconHorizontalList data={categoryData} />
+              <FlatList
+                data={categories}
+                keyExtractor={item => item}
+                renderItem={renderCategoryItem}
+                horizontal
+                contentContainerStyle={styles.categoryListContent}
+                showsHorizontalScrollIndicator={false}
+                ListEmptyComponent={
+                  <ActivityIndicator size={22} color={colors.primary} />
+                }
+              />
+            </View>
           }
           ListEmptyComponent={
             isLoading ? (
-              <ActivityIndicator size="large" style={{marginTop: 20}} />
+              <ActivityIndicator
+                size="large"
+                style={{marginTop: 20}}
+                color={colors.primary}
+              />
             ) : (
               <Text style={{textAlign: 'center', marginTop: 20}}>
                 No items found.
@@ -176,7 +185,7 @@ const styles = StyleSheet.create({
   },
   grid: {
     paddingBottom: 60,
-    paddingHorizontal: 12,
+    marginHorizontal: s(10),
   },
   searchRow: {
     flexDirection: 'row',

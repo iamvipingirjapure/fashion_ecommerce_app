@@ -3,7 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from "../../config/colors";
 const { width } = Dimensions.get('window');
-const cardWidth = (width - 48) / 2;
+const cardWidth = (width - 50) / 2;
 const ItemCard = (props: any) => {
     const { item,handleProductPress } = props
     return <Pressable style={styles.card} onPress={handleProductPress}>

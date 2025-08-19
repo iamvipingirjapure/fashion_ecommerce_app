@@ -77,7 +77,9 @@ const ChooseShippingScreen = ({navigation}: ChooseShippingScreenProps) => {
       <View style={styles.footerContainer}>
         <TouchableOpacity
           style={styles.checkoutButton}
-          onPress={() => navigation.navigate(SCREENS.PAYMENT_METHODS_SCREEN)}>
+          onPress={() => navigation.navigate(SCREENS.PAYMENT_METHODS_SCREEN,{
+            from:SCREENS.CHOOSE_SHIPPING
+          })}>
           <Text style={styles.checkoutButtonText}>Apply</Text>
         </TouchableOpacity>
       </View>
