@@ -32,6 +32,8 @@ import PaymentSuccessScreen from '../screens/payment_success/PaymentSuccessScree
 import CouponScreen from '../screens/coupon/CouponScreen';
 import MyWishlistScreen from '../screens/wishlist/MyWishlistScreen';
 import FilterScreen from '../screens/filter/FilterScreen';
+import OrdersScreen from '../screens/orders/OrdersScreen';
+import ReviewScreen from '../screens/review/ReviewScreen';
 
 export type RootStackParamList = {
   [SCREENS.SPLASH_SCREEN]: undefined;
@@ -54,6 +56,8 @@ export type RootStackParamList = {
   [SCREENS.COUPON_SCREEN]: undefined;
   [SCREENS.WISHLIST_SCREEN]: undefined;
   [SCREENS.FILTER_SCREEN]: undefined;
+  [SCREENS.ORDER_SCREEN]: undefined;
+  [SCREENS.LEAVE_REVIEW]: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -328,6 +332,22 @@ const MainNavigations = () => {
       <Stack.Screen
         name={SCREENS.FILTER_SCREEN}
         component={FilterScreen}
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS.ORDER_SCREEN}
+        component={OrdersScreen}
+        options={{
+          animation: 'slide_from_right',
+          gestureEnabled: false,
+        }}
+      />
+            <Stack.Screen
+        name={SCREENS.LEAVE_REVIEW}
+        component={ReviewScreen}
         options={{
           animation: 'slide_from_right',
           gestureEnabled: false,

@@ -6,7 +6,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import Header from '../../components/common/Header';
 import colors from '../../config/colors';
 import {s, vs} from 'react-native-size-matters';
@@ -15,6 +15,7 @@ import {RootStackParamList} from '../../navigation/MainNavigations';
 import {StackScreenProps} from '@react-navigation/stack';
 import {categories} from '../wishlist/data';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import RnRangeSlider from 'rn-range-slider';
 
 type FilterScreenProps = StackScreenProps<
   RootStackParamList,
@@ -22,6 +23,24 @@ type FilterScreenProps = StackScreenProps<
 >;
 const FilterScreen = ({navigation}: FilterScreenProps) => {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
+  const [low, setLow] = useState(7);
+  const [high, setHigh] = useState(100);
+
+  const renderThumb = useCallback(() => <View style={styles.thumb} />, []);
+  const renderRail = useCallback(() => <View style={styles.rail} />, []);
+  const renderRailSelected = useCallback(
+    () => <View style={styles.railSelected} />,
+    [],
+  );
+  const renderLabel = useCallback(
+    (value: number) => (
+      <View style={styles.label}>
+        <Text style={styles.labelText}>{value}</Text>
+      </View>
+    ),
+    [],
+  );
+  const renderNotch = useCallback(() => <View style={styles.notch} />, []);
 
   const renderCategoryItem = (category: any) => {
     const isActive = selectedCategory === category.item;
@@ -68,6 +87,29 @@ const FilterScreen = ({navigation}: FilterScreenProps) => {
           showsHorizontalScrollIndicator={false}
         />
         <Text style={styles.sectionTitle}>Price Range</Text>
+        <RnRangeSlider
+          style={{width: '100%', height: vs(20) }}
+          min={0}
+          max={500}
+          step={1}
+          floatingLabel
+          renderThumb={renderThumb}
+          renderRail={renderRail}
+          renderRailSelected={renderRailSelected}
+          renderLabel={renderLabel}
+          renderNotch={renderNotch}
+          onValueChanged={(low, high) => {
+            setLow(low);
+            setHigh(high);
+          }}
+        />
+        <View style={styles.labelRow}>
+          {['2k', '7k', '22k', '50k', '100k', '150k+'].map((label, idx) => (
+            <Text key={idx} style={styles.labelText}>
+              {label}
+            </Text>
+          ))}
+        </View>
         <Text style={styles.sectionTitle}>Reviews</Text>
         <FlatList
           data={[
@@ -170,7 +212,7 @@ const styles = StyleSheet.create({
   },
   sectionContainer: {
     paddingHorizontal: s(15),
-    flex:1
+    flex: 1,
   },
   sectionTitle: {
     fontSize: s(16),
@@ -226,12 +268,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: colors.whiteBackground,
   },
-  image: {
-    height: 100,
-    width: 100,
-    borderRadius: 10,
-    marginRight: 30,
-  },
   cartDetails: {
     flex: 1,
   },
@@ -252,10 +288,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
     borderWidth: 1,
-    borderColor:colors.ligtShadow,
+    borderColor: colors.ligtShadow,
     backgroundColor: colors.white,
-    flexDirection:"row",
-    alignItems:"center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   checkoutButton: {
     backgroundColor: colors.primary,
@@ -296,29 +332,73 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: vs(1),
     gap: s(1),
-    height: vs(30),
+    minHeight: vs(30),
   },
   ViewOrderBtn: {
     backgroundColor: colors.primary,
     borderRadius: 55,
     paddingVertical: vs(5),
-    flex:1,
+    flex: 1,
     marginVertical: vs(10),
     alignItems: 'center',
   },
-    resetFilterBtn: {
+  resetFilterBtn: {
     backgroundColor: colors.ligtShadow,
     borderRadius: 55,
     paddingVertical: vs(5),
-    flex:1,
+    flex: 1,
     marginVertical: vs(10),
     alignItems: 'center',
-  }, 
-   transparentButtonText: {
+  },
+  transparentButtonText: {
     color: colors.primary,
     fontSize: s(16),
     fontWeight: 400,
     textAlign: 'center',
     paddingVertical: vs(6),
+  },
+  thumb: {
+    width: s(18),
+    height: s(18),
+    borderRadius: 10,
+    backgroundColor: colors.primary,
+  },
+  rail: {
+    flex: 1,
+    height: 4,
+    borderRadius: 2,
+  },
+  railSelected: {
+    height: 4,
+    backgroundColor: colors.primary,
+    borderRadius: 2,
+  },
+  label: {
+    alignItems: 'center',
+    padding: 5,
+    backgroundColor: colors.primary,
+    borderRadius: 4,
+  },
+  labelText: {
+    color: colors.primary,
+    fontSize: s(12),
+    fontWeight:'600'
+  },
+  notch: {
+    width: 8,
+    height: 8,
+    backgroundColor: colors.primary,
+    transform: [{rotate: '45deg'}],
+  },
+  labelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: vs(5),
+    marginHorizontal:s(5)
+  },
+  valueText: {
+    marginTop: 10,
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
