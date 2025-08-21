@@ -99,7 +99,7 @@ const SingleProdcutDetails = () => {
             style={{position: 'absolute', bottom: vs(15), alignSelf: 'center'}}
           />
         </View>
-        <View style={{backgroundColor:colors.whiteBackground}}>
+        <View style={{backgroundColor: colors.whiteBackground}}>
           <View
             style={{
               flex: 1,
@@ -139,6 +139,7 @@ const SingleProdcutDetails = () => {
               {['S', 'M', 'L', 'XL', 'XXL', 'XXXL'].map(item => {
                 return (
                   <TouchableOpacity
+                    key={item}
                     style={{
                       height: vs(40),
                       paddingHorizontal: s(15),
@@ -180,6 +181,7 @@ const SingleProdcutDetails = () => {
                 item => {
                   return (
                     <TouchableOpacity
+                      key={item}
                       style={{
                         height: vs(30),
                         width: s(31),
@@ -209,7 +211,12 @@ const SingleProdcutDetails = () => {
               <Text style={{color: colors.lightText, fontSize: s(16)}}>
                 Total Price
               </Text>
-              <Text style={{color: colors.primary, fontSize: s(18),fontWeight:'600'}}>
+              <Text
+                style={{
+                  color: colors.primary,
+                  fontSize: s(18),
+                  fontWeight: '600',
+                }}>
                 $88.76
               </Text>
             </View>
