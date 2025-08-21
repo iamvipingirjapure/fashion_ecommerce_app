@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   label: {
     alignItems: 'center',
     padding: 5,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     borderRadius: 4,
   },
   labelText: {
